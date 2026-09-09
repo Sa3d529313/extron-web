@@ -1,0 +1,46 @@
+.section{position:relative;background:#eae7e1;color:#202126;padding:44px 24px 56px;scroll-margin-top:96px}
+.heading{max-width:1200px;margin:0 auto 28px;display:flex;justify-content:space-between;align-items:end;gap:24px;direction:rtl;text-align:right}
+.heading h2{font-size:clamp(28px,4vw,54px);line-height:1.25;margin:0}.heading p{font-size:13px;margin:12px 0 0;color:#61615e}
+.cards{max-width:1520px;margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;align-items:stretch}
+.card{border:1px solid #b7b5ad;border-radius:0;padding:8px;background:#f7f5f0;overflow:hidden;min-width:0}
+
+.photoButton{display:block;width:100%;padding:0;border:0;background:transparent;cursor:pointer;border-radius:0;overflow:hidden}
+.photo{display:block;width:100%;height:auto;transition:opacity .25s}.photoButton:hover .photo{opacity:.92}
+.caption{padding:18px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:16px;color:#202126;flex:1}.caption>div{flex:1}.card{display:flex;flex-direction:column}
+.caption h3{font-size:clamp(17px,1.5vw,21px);font-weight:700;letter-spacing:-.04em;line-height:1.2;margin:0}
+.explore{background:#fff;color:#181c24;border:1px solid #b8b8b3;border-radius:0;padding:10px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:background-color .22s,color .22s;flex-shrink:0;font-size:13px}
+.explore:hover,.explore:focus-visible,.explore:active{background:#101722;color:white}
+.photoButton:active .photo{opacity:.75}
+.card:active{box-shadow:0 2px 8px #171b1d30;transform:scale(0.97);transition:transform .15s,box-shadow .15s}
+.section button:focus-visible{outline:3px solid #739b31;outline-offset:4px}
+.section[data-detail=true]{background:#0c0e12;color:#fff;padding:20px 24px 24px}
+.detail{max-width:1160px;margin:auto}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px;font-size:12px;color:#b6b9c1}
+.back{background:#ba2637;border:0;color:white;padding:10px 16px;border-radius:6px;cursor:pointer;font-family:var(--font-ar)}
+.rail{overflow:hidden;touch-action:pan-x pan-y}
+.rail::-webkit-scrollbar{display:none}.slide{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;display:grid;grid-template-columns: minmax(0, .9fr) minmax(0,1.1fr);align-items:center;gap:42px;padding:0 4px}
+.detailPhoto{display:flex;justify-content:center;min-width:0}.detailImage{display:block;width:auto;max-width:100%;height:auto;max-height:clamp(280px,calc(100svh - 220px),520px);object-fit:contain;border-radius:12px}
+.copy{font-family:var(--font-ar);opacity:1;min-width:0}
+.slide[data-active=true] .copy{opacity:1;transform:none}
+.copy h3{font-size:clamp(30px,4vw,54px);line-height:1.05;margin:10px 0 18px;text-align:right}
+.tag{font-size:14px;margin:0}.description{font-size:16px;line-height:1.85;margin:0;color:#d1d2d7;max-width:480px}
+.copy ul{list-style:none;padding:0;margin:18px 0;display:flex;gap:8px 16px;flex-wrap:wrap;color:#bcbfc8;font-size:13px}
+.copy dl{display:flex;gap:32px;border-top:1px solid #ffffff20;padding-top:16px;margin:0}
+.copy dt{font-size:11px;color:#8f94a1}.copy dd{font-family:var(--font-display);font-size:26px;margin:7px 0 0}
+.controls{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:14px}
+.controls>button{border:1px solid #ffffff30;background:transparent;color:white;width:40px;height:36px;border-radius:6px;cursor:pointer}
+.controls>button:disabled{opacity:.25;cursor:default}.controls>div{display:flex;gap:12px}
+.controls>div button{width:10px;height:10px;border:0;border-radius:50%;background:#ffffff35;cursor:pointer}
+@media(max-width:999px){.cards{grid-template-columns:repeat(5,clamp(220px,65vw,280px));overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#555 #222;padding-bottom:14px}.card{scroll-snap-align:start}}
+@media(max-width:759px){.section{scroll-margin-top:80px}.heading{display:block}.slide{grid-template-columns:1fr;gap:18px;align-content:start}.detailImage{max-height:32svh}.toolbar>span:nth-child(2){display:none}.copy h3{font-size:30px;margin:8px 0 12px}.description{font-size:14px;line-height:1.7}.copy ul{margin:12px 0}.copy dl{gap:24px;padding-top:10px}.copy dd{font-size:22px}}
+@media(max-width:539px){.section{padding-left:16px;padding-right:16px}}
+@media(prefers-reduced-motion:reduce){.copy,.photo,.explore{transition:none}.copy{transform:none;opacity:1}}
+
+
+.cardTag{font-family:var(--font-ar);font-size:11px;color:#61615e;margin:0 0 8px;text-align:left}
+.card{box-shadow:0 8px 24px #171b1d08;transition:box-shadow .25s}
+.card:hover{box-shadow:0 12px 32px #171b1d20}
+
+
+
+
+/* GSAP handles all detail-view entrance animations */
