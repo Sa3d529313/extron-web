@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import Image from "@/components/Img";
 
 export default function Intro() {
   const [leaving, setLeaving] = useState(false);

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/Img";
 import styles from "./Lineup.module.css";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "gsap";

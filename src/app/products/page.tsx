@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Image from "next/image";
+import Image from "@/components/Img";
 
 const products = [
   {
