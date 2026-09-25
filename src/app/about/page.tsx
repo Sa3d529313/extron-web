@@ -62,7 +62,7 @@ export default function AboutPage() {
             <span className="h-px w-8 bg-[var(--lime)]" />
             عن الشركة · About
           </p>
-          <h1 className="ar-display text-[12vw] leading-[0.9] text-white md:text-[6vw]">
+          <h1 className="readex text-[12vw] leading-[0.9] text-white md:text-[6vw]">
             من فلسطين
             <br />
             <span className="text-[var(--lime)]">للعالم.</span>
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
           {/* Timeline */}
           <div className="mt-24">
-            <h2 className="ar-display mb-10 text-3xl text-white md:text-4xl">
+            <h2 className="readex mb-10 text-3xl text-white md:text-4xl">
               رحلتنا
             </h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -117,7 +117,7 @@ export default function AboutPage() {
                   <p className="display text-4xl text-[var(--lime)]">
                     {t.year}
                   </p>
-                  <p className="ar-display mt-2 text-lg text-white">
+                  <p className="readex mt-2 text-lg text-white">
                     {t.ar}
                   </p>
                   <p className="ar mt-3 text-sm leading-relaxed text-white/55" dir="rtl">
@@ -130,7 +130,7 @@ export default function AboutPage() {
 
           {/* Values */}
           <div className="mt-24">
-            <h2 className="ar-display mb-10 text-3xl text-white md:text-4xl">
+            <h2 className="readex mb-10 text-3xl text-white md:text-4xl">
               شو بيميّزنا
             </h2>
             <div className="grid gap-4 md:grid-cols-3">
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   key={t.en}
                   className="border border-white/10 bg-white/[0.02] p-8"
                 >
-                  <p className="ar-display text-2xl text-[var(--lime)]">
+                  <p className="readex text-2xl text-[var(--lime)]">
                     {t.ar}
                   </p>
                   <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-white/30">
@@ -155,7 +155,7 @@ export default function AboutPage() {
 
           {/* Mission statement */}
           <div className="mt-24 border border-[var(--lime)]/20 bg-[var(--lime)]/5 p-8 text-center md:p-12">
-            <p className="ar-display text-2xl text-white md:text-3xl">
+            <p className="readex text-2xl text-white md:text-3xl">
               &ldquo;هدفنا إن أي حدا بالعالم يشرب مشروب طاقة
               <br className="hidden md:inline" />
               ويعرف إنه <span className="text-[var(--lime)]">صُنع في فلسطين.</span>&rdquo;

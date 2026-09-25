@@ -84,7 +84,7 @@ export default function About() {
           عن الشركة · About EXTRON
           <span className="h-px w-8 bg-[var(--lime)]" />
         </p>
-        <h2 className="abt-reveal ar-display text-[11vw] leading-[0.9] text-white md:text-[6vw]">
+        <h2 className="abt-reveal readex text-[11vw] leading-[0.9] text-white md:text-[6vw]">
           من تركيا <span className="text-[var(--lime)]">لفلسطين.</span>
         </h2>
         <p className="abt-reveal display mt-3 text-xl text-white/25 md:text-2xl">
@@ -176,7 +176,7 @@ export default function About() {
               key={v.en}
               className="group border border-white/10 bg-white/[0.02] p-5 text-center transition-colors hover:border-[var(--lime)]/40"
             >
-              <p className="ar-display text-xl text-[var(--lime)] md:text-2xl">
+              <p className="readex text-xl text-[var(--lime)] md:text-2xl">
                 {v.ar}
               </p>
               <p className="display mt-2 text-xs text-white/30 uppercase">

@@ -100,7 +100,7 @@ export default function Distributors() {
                 <span className="h-px w-8 bg-black/70"></span>
                 {"للتجار والموزعين · For Trade"}
               </p>
-              <h2 className="dist-fade ar-display text-[12vw] leading-[0.9] text-black md:text-[6vw]">
+              <h2 className="dist-fade readex text-[12vw] leading-[0.9] text-black md:text-[6vw]">
                 {"مهتم بالتوزيع؟"}
                 <br />
                 <span className="text-white">{"نحكيك."}</span>
@@ -139,7 +139,7 @@ export default function Distributors() {
                 <p className="mb-2 text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
                   {"تواصل معنا · Get in Touch"}
                 </p>
-                <p className="ar-display mb-8 text-2xl text-white md:text-3xl">
+                <p className="readex mb-8 text-2xl text-white md:text-3xl">
                   {"عبّي البيانات ونتواصل معك عالواتساب."}
                 </p>
 

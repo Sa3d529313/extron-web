@@ -55,15 +55,7 @@ export default function ProductDetail({
   const related = products.filter((_, i) => i !== current);
 
   const switchProduct = (i: number) => {
-    setCurrent(i);
-    setSelectedPack(1);
-    setActiveImg(0);
-    window.history.replaceState(
-      null,
-      "",
-      `/extron-web/products/${products[i].key}`
-    );
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.location.href = `/extron-web/products/${products[i].key}`;
   };
 
   return (

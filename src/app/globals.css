@@ -23,7 +23,6 @@
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-ar: var(--font-ar);
-  --font-ar-display: var(--font-ar-display);
 }
 
 * { box-sizing: border-box; }
@@ -52,12 +51,6 @@ body {
 
 .ar {
   font-family: var(--font-ar), "Cairo", system-ui, sans-serif;
-  direction: rtl;
-  unicode-bidi: isolate;
-}
-
-.ar-display {
-  font-family: var(--font-ar-display), "Reem Kufi", system-ui, sans-serif;
   direction: rtl;
   unicode-bidi: isolate;
 }

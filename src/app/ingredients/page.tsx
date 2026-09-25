@@ -73,7 +73,7 @@ export default function IngredientsPage() {
             <span className="h-px w-8 bg-[var(--lime)]" />
             المكونات · Ingredients
           </p>
-          <h1 className="ar-display text-[12vw] leading-[0.9] text-white md:text-[6vw]">
+          <h1 className="readex text-[12vw] leading-[0.9] text-white md:text-[6vw]">
             شو <span className="text-[var(--lime)]">جوّا؟</span>
           </h1>
           <p className="ar mt-6 max-w-2xl text-lg leading-relaxed text-white/60" dir="rtl">
@@ -90,7 +90,7 @@ export default function IngredientsPage() {
               >
                 <div className="mb-4 flex items-start justify-between">
                   <div>
-                    <p className="ar-display text-xl text-white">{ing.ar}</p>
+                    <p className="readex text-xl text-white">{ing.ar}</p>
                     <p className="mt-0.5 text-[10px] uppercase tracking-[0.25em] text-white/40">
                       {ing.en}
                     </p>
@@ -108,7 +108,7 @@ export default function IngredientsPage() {
 
           {/* Our promises */}
           <div className="mt-20">
-            <h2 className="ar-display mb-8 text-3xl text-white md:text-4xl">
+            <h2 className="readex mb-8 text-3xl text-white md:text-4xl">
               وعودنا <span className="text-[var(--lime)]">إلك.</span>
             </h2>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">

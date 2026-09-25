@@ -21,7 +21,7 @@ export default function DistributorsPage() {
             <span className="h-px w-8 bg-[var(--lime)]" />
             للتجار · For Trade
           </p>
-          <h1 className="ar-display text-[12vw] leading-[0.9] text-white md:text-[5vw]">
+          <h1 className="readex text-[12vw] leading-[0.9] text-white md:text-[5vw]">
             اشتغل <span className="text-[var(--lime)]">معنا.</span>
           </h1>
         </div>
@@ -38,25 +38,25 @@ export default function DistributorsPage() {
 
           <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2 md:gap-6">
             <div className="border border-white/10 bg-white/[0.02] p-6">
-              <p className="ar-display text-lg text-[var(--lime)]">منتج مطلوب</p>
+              <p className="readex text-lg text-[var(--lime)]">منتج مطلوب</p>
               <p className="ar mt-2 text-sm leading-relaxed text-white/50" dir="rtl">
                 الزبائن بيدوروا عليه — بيبيع حاله لأنه مختلف.
               </p>
             </div>
             <div className="border border-white/10 bg-white/[0.02] p-6">
-              <p className="ar-display text-lg text-[var(--lime)]">هوامش ربح تنافسية</p>
+              <p className="readex text-lg text-[var(--lime)]">هوامش ربح تنافسية</p>
               <p className="ar mt-2 text-sm leading-relaxed text-white/50" dir="rtl">
                 أسعار جملة تترك ربح حقيقي لك.
               </p>
             </div>
             <div className="border border-white/10 bg-white/[0.02] p-6">
-              <p className="ar-display text-lg text-[var(--lime)]">دعم تسويقي كامل</p>
+              <p className="readex text-lg text-[var(--lime)]">دعم تسويقي كامل</p>
               <p className="ar mt-2 text-sm leading-relaxed text-white/50" dir="rtl">
                 لافتات، ثلاجات عرض، عينات مجانية.
               </p>
             </div>
             <div className="border border-white/10 bg-white/[0.02] p-6">
-              <p className="ar-display text-lg text-[var(--lime)]">توصيل منتظم</p>
+              <p className="readex text-lg text-[var(--lime)]">توصيل منتظم</p>
               <p className="ar mt-2 text-sm leading-relaxed text-white/50" dir="rtl">
                 جدول توزيع أسبوعي يغطي كل المدن.
               </p>

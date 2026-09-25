@@ -88,7 +88,7 @@ export default function ProductsPage() {
             <span className="h-px w-8 bg-[var(--lime)]" />
             المنتجات · Products
           </p>
-          <h1 className="ar-display text-[12vw] leading-[0.9] text-white md:text-[6vw]">
+          <h1 className="readex text-[12vw] leading-[0.9] text-white md:text-[6vw]">
             تشكيلتنا <span className="text-[var(--lime)]">الكاملة.</span>
           </h1>
           <p className="ar mt-6 max-w-2xl text-lg leading-relaxed text-white/60" dir="rtl">
@@ -127,7 +127,7 @@ export default function ProductsPage() {
                   >
                     {p.arTag}
                   </p>
-                  <h2 className="ar-display text-[7vw] leading-[0.9] text-white md:text-[3.5vw]">
+                  <h2 className="readex text-[7vw] leading-[0.9] text-white md:text-[3.5vw]">
                     {p.ar}
                   </h2>
                   <p className="display mt-1 text-lg text-white/25">{p.en}</p>

@@ -50,7 +50,7 @@ export default function Ingredients() {
             <span className="h-px w-8 bg-[var(--lime)]" />
             المكونات · What's Inside
           </p>
-          <h2 className="ar-display text-[12vw] leading-[0.9] text-white md:text-[5.5vw]">
+          <h2 className="readex text-[12vw] leading-[0.9] text-white md:text-[5.5vw]">
             المكونات <span className="text-[var(--lime)]">تحكي.</span>
           </h2>
           <p className="display mt-2 text-lg text-white/25 md:text-xl">
