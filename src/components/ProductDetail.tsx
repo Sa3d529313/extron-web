@@ -118,10 +118,10 @@ export default function ProductDetail({
                 ))}
               </div>
 
-              {/* Vertical thumbnail strip to the left of the main photo */}
-              {gallery.length > 1 && (
-                <div className="order-first flex shrink-0 flex-col gap-3">
-                  {gallery.map((img, i) => (
+              {/* Vertical thumbnail strip to the left of the main photo — spacer when no gallery */}
+              <div className="order-first flex shrink-0 flex-col gap-3">
+                {gallery.length > 1 ? (
+                  gallery.map((img, i) => (
                     <button
                       key={img.src}
                       onClick={() => setActiveImg(i)}
@@ -140,9 +140,11 @@ export default function ProductDetail({
                         className="h-full w-full rounded-xl object-cover"
                       />
                     </button>
-                  ))}
-                </div>
-              )}
+                  ))
+                ) : (
+                  <div className="h-24 w-24 lg:h-[109px] lg:w-[109px]" />
+                )}
+              </div>
             </div>
           </div>
 

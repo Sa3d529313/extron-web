@@ -42,9 +42,9 @@ export const productData: Product[] = [
       { label: "Origin", arLabel: "المنشأ", value: "Palestine" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 25 },
-      { size: 12, label: "12 عبوة", price: 45, discount: "وفّر 10%" },
-      { size: 24, label: "24 عبوة", price: 82, discount: "وفّر 18%" },
+      { size: 6, label: "6 عبوات", price: 25, img: "/brand/6pack.png" },
+      { size: 12, label: "12 عبوة", price: 45, discount: "وفّر 10%", img: "/brand/12pack.png" },
+      { size: 24, label: "24 عبوة", price: 82, discount: "وفّر 18%", img: "/brand/24pack.jpg" },
     ],
   },
   {
@@ -70,9 +70,9 @@ export const productData: Product[] = [
       { label: "Volume", arLabel: "الحجم", value: "250ml" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 28 },
-      { size: 12, label: "12 عبوة", price: 50, discount: "وفّر 11%" },
-      { size: 24, label: "24 عبوة", price: 90, discount: "وفّر 20%" },
+      { size: 6, label: "6 عبوات", price: 28, img: "/brand/6pack.png" },
+      { size: 12, label: "12 عبوة", price: 50, discount: "وفّر 11%", img: "/brand/12pack.png" },
+      { size: 24, label: "24 عبوة", price: 90, discount: "وفّر 20%", img: "/brand/24pack.jpg" },
     ],
   },
   {
@@ -127,9 +127,9 @@ export const productData: Product[] = [
       { label: "Best", arLabel: "الأفضل", value: "Cold" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 22 },
-      { size: 12, label: "12 عبوة", price: 40, discount: "وفّر 9%" },
-      { size: 24, label: "24 عبوة", price: 72, discount: "وفّر 18%" },
+      { size: 6, label: "6 عبوات", price: 22, img: "/brand/6pack.png" },
+      { size: 12, label: "12 عبوة", price: 40, discount: "وفّر 9%", img: "/brand/12pack.png" },
+      { size: 24, label: "24 عبوة", price: 72, discount: "وفّر 18%", img: "/brand/24pack.jpg" },
     ],
   },
   {
@@ -155,9 +155,9 @@ export const productData: Product[] = [
       { label: "Best", arLabel: "الأفضل", value: "Cold" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 24 },
-      { size: 12, label: "12 عبوة", price: 42, discount: "وفّر 12%" },
-      { size: 24, label: "24 عبوة", price: 78, discount: "وفّر 19%" },
+      { size: 6, label: "6 عبوات", price: 24, img: "/brand/6pack.png" },
+      { size: 12, label: "12 عبوة", price: 42, discount: "وفّر 12%", img: "/brand/12pack.png" },
+      { size: 24, label: "24 عبوة", price: 78, discount: "وفّر 19%", img: "/brand/24pack.jpg" },
     ],
   },
 ];
