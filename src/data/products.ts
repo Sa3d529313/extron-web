@@ -22,6 +22,7 @@ export const productData: Product[] = [
   {
     key: "fizo",
     src: "/brand/drink-grey.png",
+    detailSrc: "/brand/111.png",
     en: "FIZO · Lemon-Lime",
     ar: "فيزو",
     tag: "New Generation Soda",
@@ -49,6 +50,7 @@ export const productData: Product[] = [
   {
     key: "extron-pink",
     src: "/brand/drink-pink.png",
+    detailSrc: "/brand/444.png",
     en: "EXTRON for Women",
     ar: "إكسترون للسيدات",
     tag: "Berry × Vitamins",
@@ -105,6 +107,7 @@ export const productData: Product[] = [
   {
     key: "for-us",
     src: "/brand/drink-orange.png",
+    detailSrc: "/brand/222.png",
     en: "FOR US · Orange",
     ar: "فور أص",
     tag: "Sparkling Orange Soda",
@@ -132,6 +135,7 @@ export const productData: Product[] = [
   {
     key: "cola-nova",
     src: "/brand/drink-red.png",
+    detailSrc: "/brand/333.png",
     en: "COLA NOVA",
     ar: "كولا نوفا",
     tag: "New Generation Cola",

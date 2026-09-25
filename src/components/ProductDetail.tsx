@@ -129,7 +129,7 @@ export default function ProductDetail({
                       className={`${styles.thumbnail} h-24 w-24 rounded-2xl border p-1 lg:h-[109px] lg:w-[109px]`}
                       style={{
                         borderColor:
-                          i === activeImg ? p.accent : "rgba(0,0,0,0.08)",
+                          i === activeImg ? "#a6ec2f" : "rgba(0,0,0,0.08)",
                       }}
                     >
                       <Image
@@ -184,7 +184,7 @@ export default function ProductDetail({
                 ₪{pack.price}
               </span>
               {pack.discount && (
-                <span className="readex rounded-full px-3 py-1 text-[11px] font-semibold text-black/80" style={{ backgroundColor: `${p.accent}30` }}>
+                <span className="readex rounded-full px-3 py-1 text-[11px] font-semibold text-black/80" style={{ backgroundColor: "#a6ec2f30" }}>
                   {pack.discount}
                 </span>
               )}
@@ -228,7 +228,7 @@ export default function ProductDetail({
                   right: "6px",
                   transform: `translateX(calc(${selectedPack} * (-100% - 4px)))`,
                   transition: "transform 400ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  boxShadow: `0 2px 12px #00000008, inset 0 -3px 0 ${p.accent}`,
+                  boxShadow: "0 2px 12px #00000008, inset 0 -3px 0 #a6ec2f",
                 }}
               />
               {p.packs.map((pk, i) => {
@@ -257,7 +257,7 @@ export default function ProductDetail({
                     <span
                       aria-hidden="true"
                       className="mt-2 flex h-4 w-4 items-center justify-center rounded-full border"
-                      style={{ borderColor: active ? p.accent : "#00000025", backgroundColor: active ? p.accent : "transparent" }}
+                      style={{ borderColor: active ? "#a6ec2f" : "#00000025", backgroundColor: active ? "#a6ec2f" : "transparent" }}
                     >
                       {active && <span className="h-1.5 w-1.5 rounded-full bg-black" />}
                     </span>
