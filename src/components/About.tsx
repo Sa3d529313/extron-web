@@ -166,7 +166,7 @@ export default function About() {
       </div>
 
       {/* VALUES — Arabic primary */}
-      <div className="mx-auto mt-100 max-w-[1600px] px-6 pb-16 md:px-8 md:pb-32">
+      <div className="mx-auto mt-12 max-w-[1600px] px-6 pb-16 md:mt-100 md:px-8 md:pb-32">
         <p className="abt-reveal mb-6 text-center text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
           قيمنا · What We Stand For
         </p>

@@ -87,7 +87,7 @@ export default function ProductDetail({
         <div dir="ltr" className="grid items-start gap-8 md:grid-cols-[1.5fr_1fr] md:gap-4 lg:gap-5">
           {/* Product image with thumbnails at the top-left */}
           <div className="min-w-0 md:pr-6">
-            <div className="mr-auto flex w-full items-start gap-10" style={{ maxWidth: "calc(clamp(400px, 72vh, 760px) * 1153 / 1364 + 149px)" }}>
+            <div className="mx-auto flex w-full items-start gap-0 md:mr-auto md:ml-0 md:gap-10" style={{ maxWidth: "calc(clamp(400px, 72vh, 760px) * 1153 / 1364 + 149px)" }}>
               {/* Main image — fixed height container so layout doesn't shift */}
               <div
                 className="relative flex aspect-[1153/1364] min-w-0 flex-1 items-center justify-center overflow-hidden rounded-3xl"
@@ -100,7 +100,7 @@ export default function ProductDetail({
                     width={800}
                     height={1000}
                     priority={i === 0}
-                    sizes="(min-width: 768px) 48vw, 70vw"
+                    sizes="(min-width: 768px) 48vw, 85vw"
                     className="absolute inset-0 h-full w-full rounded-3xl object-contain transition-opacity duration-500 ease-in-out"
                     style={{
                       opacity: activeImg === i ? 1 : 0,
@@ -110,8 +110,8 @@ export default function ProductDetail({
                 ))}
               </div>
 
-              {/* Vertical thumbnail strip to the left of the main photo — spacer when no gallery */}
-              <div className="order-first flex shrink-0 flex-col gap-3">
+              {/* Vertical thumbnail strip — hidden on mobile */}
+              <div className="order-first hidden shrink-0 flex-col gap-3 md:flex">
                 {gallery.length > 1 ? (
                   gallery.map((img, i) => (
                     <button
