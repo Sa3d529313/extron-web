@@ -7,6 +7,8 @@
   --ink-dim: #a3a7b3;
   --lime: #a6ec2f;
   --lime-glow: #c8ff5a;
+  --font-display: var(--font-body);
+  --font-space: var(--font-body);
   --pink: #f0338d;
   --orange: #ff7a1a;
   --red: #e5222b;

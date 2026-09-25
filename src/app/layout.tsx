@@ -4,10 +4,10 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollToTop from "@/components/ScrollToTop";
 
-const display = Montserrat({
-  weight: ["600", "700", "800", "900"],
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -19,26 +19,11 @@ const brandFont = Archivo_Black({
   display: "swap",
 });
 
-const body = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-body",
-  display: "swap",
-});
-
 // Arabic body — clean, engineered, matches "clean energy" tone
 const ar = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-ar",
-  display: "swap",
-});
-
-// Montserrat for English product headings and supporting text
-const spaceGrotesk = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
   display: "swap",
 });
 
@@ -64,7 +49,7 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${display.variable} ${body.variable} ${ar.variable} ${brandFont.variable} ${spaceGrotesk.variable} ${readexPro.variable}`}
+      className={`${montserrat.variable} ${ar.variable} ${brandFont.variable} ${readexPro.variable}`}
     >
       <body><ScrollToTop /><SmoothScroll>{children}</SmoothScroll></body>
     </html>
