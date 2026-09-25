@@ -53,7 +53,7 @@ export default function AboutPage() {
       <Nav />
       <main className="min-h-screen bg-[var(--bg)] pt-28 pb-20">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-          <a href="/" className="ar mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[var(--lime)]" dir="rtl">
+          <a href="/extron-web/" className="ar mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[var(--lime)]" dir="rtl">
             <span dir="ltr">→</span>
             <span>العودة للرئيسية</span>
           </a>

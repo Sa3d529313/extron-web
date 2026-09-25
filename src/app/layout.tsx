@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Anton, Inter, Rubik, IBM_Plex_Sans_Arabic, Archivo_Black } from "next/font/google";
+import { Montserrat, Aref_Ruqaa, IBM_Plex_Sans_Arabic, Archivo_Black, Readex_Pro } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollToTop from "@/components/ScrollToTop";
 
-const display = Anton({
-  weight: "400",
+const display = Montserrat({
+  weight: ["600", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
@@ -17,7 +19,7 @@ const brandFont = Archivo_Black({
   display: "swap",
 });
 
-const body = Inter({
+const body = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-body",
@@ -32,11 +34,27 @@ const ar = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-// Arabic display — geometric, bold, sits next to Anton confidently
-const arDisplay = Rubik({
+// Bold calligraphic Arabic headings
+const arDisplay = Aref_Ruqaa({
   subsets: ["arabic", "latin"],
-  weight: ["700", "800", "900"],
+  weight: "700",
   variable: "--font-ar-display",
+  display: "swap",
+});
+
+// Montserrat for English product headings and supporting text
+const spaceGrotesk = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space",
+  display: "swap",
+});
+
+// Readable Arabic body text paired with Montserrat
+const readexPro = Readex_Pro({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-readex",
   display: "swap",
 });
 
@@ -54,9 +72,9 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${display.variable} ${body.variable} ${ar.variable} ${arDisplay.variable} ${brandFont.variable}`}
+      className={`${display.variable} ${body.variable} ${ar.variable} ${arDisplay.variable} ${brandFont.variable} ${spaceGrotesk.variable} ${readexPro.variable}`}
     >
-      <body>{children}</body>
+      <body><ScrollToTop /><SmoothScroll>{children}</SmoothScroll></body>
     </html>
   );
 }

@@ -1,14 +1,14 @@
-.section{position:relative;background:#eae7e1;color:#202126;padding:44px 24px 56px;scroll-margin-top:96px}
+.section{position:relative;background:#fff;color:#202126;padding:44px 24px 56px;scroll-margin-top:96px}
 .heading{max-width:1200px;margin:0 auto 28px;display:flex;justify-content:space-between;align-items:end;gap:24px;direction:rtl;text-align:right}
 .heading h2{font-size:clamp(28px,4vw,54px);line-height:1.25;margin:0}.heading p{font-size:13px;margin:12px 0 0;color:#61615e}
 .cards{max-width:1520px;margin:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;align-items:stretch}
-.card{border:1px solid #b7b5ad;border-radius:0;padding:8px;background:#f7f5f0;overflow:hidden;min-width:0}
+.card{border:1px solid #d6d4cf;border-radius:0;padding:8px;background:#fafaf8;overflow:hidden;min-width:0}
 
 .photoButton{display:block;width:100%;padding:0;border:0;background:transparent;cursor:pointer;border-radius:0;overflow:hidden}
 .photo{display:block;width:100%;height:auto;transition:opacity .25s}.photoButton:hover .photo{opacity:.92}
 .caption{padding:18px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:16px;color:#202126;flex:1}.caption>div{flex:1}.card{display:flex;flex-direction:column}
-.caption h3{font-size:clamp(17px,1.5vw,21px);font-weight:700;letter-spacing:-.04em;line-height:1.2;margin:0}
-.explore{background:#fff;color:#181c24;border:1px solid #b8b8b3;border-radius:0;padding:10px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:background-color .22s,color .22s;flex-shrink:0;font-size:13px}
+.caption h3{font-family:var(--font-space),"Space Grotesk",system-ui,sans-serif;font-size:clamp(17px,1.5vw,21px);font-weight:700;letter-spacing:-.04em;line-height:1.2;margin:0}
+.explore{font-family:var(--font-readex),system-ui,sans-serif;background:#fff;color:#181c24;border:1px solid #b8b8b3;border-radius:0;padding:10px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:background-color .22s,color .22s;flex-shrink:0;font-size:13px}
 .explore:hover,.explore:focus-visible,.explore:active{background:#101722;color:white}
 .photoButton:active .photo{opacity:.75}
 .card:active{box-shadow:0 2px 8px #171b1d30;transform:scale(0.97);transition:transform .15s,box-shadow .15s}
@@ -36,7 +36,7 @@
 @media(prefers-reduced-motion:reduce){.copy,.photo,.explore{transition:none}.copy{transform:none;opacity:1}}
 
 
-.cardTag{font-family:var(--font-ar);font-size:11px;color:#61615e;margin:0 0 8px;text-align:left}
+.cardTag{font-family:var(--font-readex),system-ui,sans-serif;font-size:11px;color:#61615e;margin:0 0 8px;text-align:left}
 .card{box-shadow:0 8px 24px #171b1d08;transition:box-shadow .25s}
 .card:hover{box-shadow:0 12px 32px #171b1d20}
 

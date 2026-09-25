@@ -28,14 +28,24 @@
 
 * { box-sizing: border-box; }
 
-html, body {
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+html {
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
-
 body {
+  overflow-x: clip;
+  overscroll-behavior-x: none;
   font-family: var(--font-body), Inter, system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
 }
@@ -56,6 +66,16 @@ body {
   font-family: var(--font-display), "Anton", "Bebas Neue", system-ui, sans-serif;
   letter-spacing: -0.02em;
   line-height: 0.88;
+}
+
+.space {
+  font-family: var(--font-space), "Space Grotesk", system-ui, sans-serif;
+}
+
+.readex {
+  font-family: var(--font-readex), "Readex Pro", system-ui, sans-serif;
+  direction: rtl;
+  unicode-bidi: isolate;
 }
 
 /* Reflective stage floor gradient */
@@ -124,6 +144,31 @@ body {
   border-color: transparent !important;
 }
 
+/* Hero background slideshow — always left */
+@keyframes heroSlideOut {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(-15%); opacity: 0; }
+}
+@keyframes heroSlideIn {
+  from { transform: translateX(15%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes heroProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ScrollReveal */
+.scroll-reveal { margin: 20px 0; }
+.scroll-reveal-text {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+.sr-word { display: inline-block; }
+
 /* Can restless drift */
 @keyframes drift {
   0%, 100% { transform: translateX(0); }
@@ -134,39 +179,6 @@ body {
 /* FAQ chevron rotation */
 details[open] .faq-chevron { transform: rotate(45deg); }
 
-/* E [X-logo] TRON header wordmark — Anton letters flanking the transparent X.
-   Sized so the visible X shape (which occupies ~55% of the PNG) matches the
-   letter cap-height. Small positive gap keeps the three parts distinct
-   instead of overlapping. */
-.brand-mark {
-  gap: 0.1rem;
-  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
-}
-.brand-letter {
-  font-family: var(--font-brand), "Archivo Black", "Anton", system-ui, sans-serif;
-  color: #ffffff;
-  font-size: 1.65rem;       /* ~26px mobile — wider font reads bigger */
-  line-height: 1;
-  letter-spacing: 0.02em;
-  transform: translateY(1px);
-}
-@media (min-width: 768px) {
-  .brand-letter {
-    font-size: 2rem;        /* 32px desktop */
-  }
-}
-.brand-x {
-  height: 2.5rem;           /* 40px mobile — X shape ≈ 22px, matches letter cap */
-  width: auto;
-  transform: scale(1.2);
-  margin: 0 -0.25rem;
-}
-@media (min-width: 768px) {
-  .brand-x {
-    height: 3rem;           /* 48px desktop; X shape ≈ 27px */
-    margin: 0 -0.3rem;
-  }
-}
 
 /* Glassy pill behind nav links */
 .glass-pill {
@@ -238,6 +250,38 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 .nav-link:hover .nav-link-label,
 .nav-link:focus-visible .nav-link-label {
   transform: translateY(-1px);
+}
+
+/* Floating nav link — used inside the glass navbar */
+.nav-link-floating {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.nav-link-floating-label {
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+.nav-link-floating-bar {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--nav-accent, #05060a);
+  border-radius: 2px;
+  transition: left 0.4s cubic-bezier(0.22, 0.9, 0.36, 1),
+              right 0.4s cubic-bezier(0.22, 0.9, 0.36, 1);
+}
+.nav-link-floating:hover .nav-link-floating-bar,
+.nav-link-floating:focus-visible .nav-link-floating-bar {
+  left: 12px;
+  right: 12px;
+}
+.nav-link-floating:hover .nav-link-floating-label,
+.nav-link-floating:focus-visible .nav-link-floating-label {
+  color: var(--nav-accent, #05060a) !important;
 }
 
 /* Lineup can — animated via direct DOM writes; static transition here avoids React restart weirdness */
@@ -469,12 +513,28 @@ details[open] .faq-chevron { transform: rotate(45deg); }
   transform: translateY(-2px);
 }
 
+/* Hero CTA glow on hover — --glow is set per-button via inline style */
+.hero-cta-primary {
+  box-shadow: 0 0 0 transparent;
+}
+.hero-cta-primary:hover {
+  box-shadow: 0 0 24px color-mix(in srgb, var(--glow) 45%, transparent),
+              0 0 60px color-mix(in srgb, var(--glow) 20%, transparent);
+}
+.hero-cta-secondary {
+  box-shadow: 0 0 0 transparent;
+}
+.hero-cta-secondary:hover {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--glow) 25%, transparent),
+              0 0 50px color-mix(in srgb, var(--glow) 10%, transparent);
+  border-color: color-mix(in srgb, var(--glow) 50%, transparent) !important;
+}
+
 /* CSS-only scroll reveal — lightweight, no GSAP overhead */
 .lineup-card,
 .perk-card,
 .about-tile,
-.about-fade,
-.pillar {
+.about-fade {
   opacity: 0;
   transform: translateY(40px);
   transition:
@@ -484,8 +544,7 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 .lineup-card.revealed,
 .perk-card.revealed,
 .about-tile.revealed,
-.about-fade.revealed,
-.pillar.revealed {
+.about-fade.revealed {
   opacity: 1;
   transform: translateY(0);
 }
@@ -497,9 +556,6 @@ details[open] .faq-chevron { transform: rotate(45deg); }
   /* Kill gap between Ingredients and Distributors */
   #ingredients { padding-bottom: 0 !important; margin-bottom: 0 !important; padding-top: 32px !important; }
   #ingredients > div > div:first-child { margin-bottom: 24px !important; }
-  #ingredients .pillars { margin-bottom: 0 !important; gap: 12px !important; }
-  #ingredients .pillar { opacity: 1 !important; transform: none !important; padding: 16px !important; }
-  #ingredients .pillar .display.mb-6 { display: none !important; }
   #ingredients .mb-12 { margin-bottom: 16px !important; }
   #ingredients::after {
     content: "";
@@ -521,9 +577,16 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 
 
 /* Slow breathing glow: animate opacity instead of recalculating blur every frame. */
-.intro-mask { opacity: 1; transition: opacity 700ms cubic-bezier(.4,0,.2,1); }
+.intro-mask { opacity: 1; transition: opacity 1100ms cubic-bezier(.4,0,.2,1); }
 .intro-mask[data-leaving="true"] { opacity: 0; pointer-events: none; }
-.intro-logo { position: relative; }
+.intro-logo {
+  position: relative;
+  transition: opacity 900ms ease, transform 900ms cubic-bezier(.4,0,.2,1);
+}
+.intro-mask[data-leaving="true"] .intro-logo {
+  opacity: 0;
+  transform: scale(0.92);
+}
 .intro-logo-base { display: block; opacity: .3; }
 .intro-logo-glow {
   position: absolute;

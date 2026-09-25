@@ -1,6 +1,6 @@
 import NextImage, { ImageProps } from "next/image";
 
-const basePath = process.env.NODE_ENV === "production" ? "/extron-web" : "";
+const basePath = "/extron-web";
 
 export default function Img({ src, ...props }: ImageProps) {
   const prefixed =

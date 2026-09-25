@@ -9,7 +9,7 @@ export default function Intro() {
 
   useEffect(() => {
     const fadeTimer = setTimeout(() => setLeaving(true), 2600);
-    const removeTimer = setTimeout(() => setGone(true), 3300);
+    const removeTimer = setTimeout(() => setGone(true), 3800);
     return () => {
       clearTimeout(fadeTimer);
       clearTimeout(removeTimer);

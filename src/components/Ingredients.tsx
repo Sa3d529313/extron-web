@@ -3,33 +3,13 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
   { num: "108", unit: "mg", ar: "كافيين طبيعي", en: "Natural Caffeine" },
   { num: "0", unit: "g", ar: "سكر مضاف", en: "Added Sugar" },
   { num: "5", unit: "", ar: "نكهات مميزة", en: "Distinct Flavors" },
   { num: "100", unit: "%", ar: "مصادر طبيعية", en: "Natural Sources" },
-];
-
-const pillars = [
-  {
-    ar: "بلا اصطناع",
-    en: "Clean Formula",
-    arDesc: "بدون مواد حافظة. بدون ألوان اصطناعية. نكهة حقيقية من مكونات حقيقية.",
-    enDesc: "No preservatives. No artificial colors.",
-  },
-  {
-    ar: "طاقة حقيقية",
-    en: "Real Energy",
-    arDesc: "كافيين نباتي، توراين، جينسنغ وغوارانا — طاقة تدوم بدون انهيار.",
-    enDesc: "Plant caffeine, taurine, ginseng & guarana.",
-  },
-  {
-    ar: "لكل الأذواق",
-    en: "Made For All",
-    arDesc: "خمس نكهات متنوعة — من مشروب الطاقة النظيف للصودا والكولا.",
-    enDesc: "Five flavors across the full lineup.",
-  },
 ];
 
 export default function Ingredients() {
@@ -51,15 +31,6 @@ export default function Ingredients() {
           },
         });
       });
-
-      gsap.from(".pillar", {
-        y: 60,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".pillars", start: "top 90%" },
-      });
     }, ref);
 
     ScrollTrigger.refresh();
@@ -70,7 +41,7 @@ export default function Ingredients() {
     <section
       id="ingredients"
       ref={ref}
-      className="metal-sheen relative overflow-hidden pt-12 pb-0 md:pt-24 md:pb-6"
+      className="relative overflow-hidden pt-12 pb-12 md:pt-24 md:pb-16"
     >
       <div className="mx-auto max-w-[1500px] px-6 md:px-10">
         {/* Header — Arabic primary */}
@@ -85,13 +56,15 @@ export default function Ingredients() {
           <p className="display mt-2 text-lg text-white/25 md:text-xl">
             THE INGREDIENTS TALK.
           </p>
-          <p className="ar mt-6 max-w-xl text-lg leading-relaxed text-white/60" dir="rtl">
-            طاقة حقيقية من مصادر حقيقية. كل مكوّن مختار بعناية — بدون حشو، بدون مفاجآت.
-          </p>
+          <div className="ar mt-6 max-w-xl text-lg leading-relaxed text-white/60" dir="rtl">
+            <ScrollReveal baseOpacity={0.15} blurStrength={3} baseRotation={2}>
+              {"طاقة حقيقية من مصادر حقيقية. كل مكوّن مختار بعناية — بدون حشو، بدون مفاجآت."}
+            </ScrollReveal>
+          </div>
         </div>
 
         {/* Stat grid */}
-        <div className="mb-12 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
           {stats.map((s) => (
             <div
               key={s.en}
@@ -117,30 +90,6 @@ export default function Ingredients() {
                   {s.en}
                 </p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Pillars — Arabic primary */}
-        <div className="pillars grid gap-6 md:grid-cols-3">
-          {pillars.map((p, i) => (
-            <div
-              key={p.en}
-              className="pillar relative overflow-hidden border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-8"
-            >
-              <p className="display mb-6 text-6xl text-white/10">0{i + 1}</p>
-              <p className="ar-display text-3xl text-white md:text-4xl">
-                {p.ar}
-              </p>
-              <p className="display mt-1 text-sm text-[var(--lime)] uppercase">
-                {p.en}
-              </p>
-              <p className="ar mt-5 text-sm leading-relaxed text-white/60" dir="rtl">
-                {p.arDesc}
-              </p>
-              <p className="mt-2 text-[11px] text-white/30">
-                {p.enDesc}
-              </p>
             </div>
           ))}
         </div>
