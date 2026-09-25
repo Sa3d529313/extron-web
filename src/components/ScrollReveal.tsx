@@ -27,7 +27,7 @@ export default function ScrollReveal({
   containerClassName = "",
   textClassName = "",
   rotationEnd = "bottom bottom",
-  wordAnimationEnd = "top 55%",
+  wordAnimationEnd = "top 76%",
 }: ScrollRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
