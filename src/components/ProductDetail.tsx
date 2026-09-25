@@ -180,7 +180,7 @@ export default function ProductDetail({
 
             {/* Price */}
             <div className="mt-6 flex items-baseline gap-3" dir="ltr">
-              <span className="space text-[28px] font-bold text-black">
+              <span className="space text-[28px] font-bold" style={{ color: "#1a7a2e" }}>
                 ₪{pack.price}
               </span>
               {pack.discount && (
@@ -225,8 +225,8 @@ export default function ProductDetail({
                   width: "calc((100% - 20px) / 3)",
                   height: "calc(100% - 12px)",
                   top: "6px",
-                  left: "6px",
-                  transform: `translateX(calc(${selectedPack} * (100% + 4px)))`,
+                  right: "6px",
+                  transform: `translateX(calc(${selectedPack} * (-100% - 4px)))`,
                   transition: "transform 400ms cubic-bezier(0.22, 1, 0.36, 1)",
                   boxShadow: `0 2px 12px #00000008, inset 0 -3px 0 ${p.accent}`,
                 }}
@@ -250,7 +250,7 @@ export default function ProductDetail({
                         className="my-3 h-14 w-full object-contain mix-blend-multiply"
                       />
                     )}
-                    <span className="space mt-2 text-lg font-bold text-black" dir="ltr">₪{pk.price}</span>
+                    <span className="space mt-2 text-lg font-bold" dir="ltr" style={{ color: "#1a7a2e" }}>₪{pk.price}</span>
                     <span className="readex mt-2 min-h-5 text-[10px] font-medium text-black/60">
                       {pk.discount || "العبوة الأساسية"}
                     </span>
@@ -271,8 +271,8 @@ export default function ProductDetail({
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.cta} mt-5 flex w-full items-center justify-center gap-3 rounded-full py-3.5 text-black`}
-              style={{ backgroundColor: p.accent }}
+              className={`${styles.cta} ${styles.whatsappGlow} mt-5 flex w-full items-center justify-center gap-3 rounded-full py-3.5 text-black`}
+              style={{ backgroundColor: p.accent, "--glow-color": p.accent } as CSSProperties}
             >
               <svg
                 width="18"

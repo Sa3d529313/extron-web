@@ -71,7 +71,22 @@
   transform: scale(1.035);
 }
 
+@keyframes whatsappPulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--glow-color) 40%, transparent); }
+  50% { box-shadow: 0 0 18px 4px color-mix(in srgb, var(--glow-color) 25%, transparent); }
+}
+
+.whatsappGlow {
+  animation: whatsappPulse 2.5s ease-in-out infinite;
+}
+
+.whatsappGlow:hover {
+  animation: none;
+  box-shadow: 0 0 24px 6px color-mix(in srgb, var(--glow-color) 35%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .whatsappGlow { animation: none; }
   .related,
   .thumbnail,
   .pack,
