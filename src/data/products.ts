@@ -74,6 +74,7 @@ export const productData: Product[] = [
       { size: 12, label: "12 عبوة", price: 50, discount: "وفّر 11%", img: "/brand/12pack.png" },
       { size: 24, label: "24 عبوة", price: 90, discount: "وفّر 20%", img: "/brand/24pack.jpg" },
     ],
+    gallery: ["/brand/women-fruit.png", "/brand/women-beach.png"],
   },
   {
     key: "extron-green",
@@ -102,7 +103,7 @@ export const productData: Product[] = [
       { size: 12, label: "12 عبوة", price: 54, discount: "وفّر 10%", img: "/brand/12pack.png" },
       { size: 24, label: "24 عبوة", price: 96, discount: "وفّر 20%", img: "/brand/24pack.jpg" },
     ],
-    gallery: ["/lifestyle/pic3.jpg", "/lifestyle/pic5.jpg"],
+    gallery: ["/brand/green-fruit.png", "/lifestyle/pic3.jpg", "/lifestyle/pic5.jpg"],
   },
   {
     key: "for-us",

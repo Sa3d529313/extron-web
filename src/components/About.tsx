@@ -20,26 +20,26 @@ const values = [
 
 const COL_1 = [
   "/lifestyle/pic1.jpg",
-  "/lifestyle/pic4.jpg",
+  "/lifestyle/pic11.jpg",
   "/lifestyle/pic7.jpg",
 ];
 const COL_2 = [
   "/lifestyle/pic2.jpg",
-  "/lifestyle/pic5.jpg",
+  "/lifestyle/pic13.png",
   "/lifestyle/pic8.jpg",
 ];
 const COL_3 = [
-  "/lifestyle/pic6.jpg",
+  "/lifestyle/pic14.png",
   "/lifestyle/pic9.jpg",
   "/lifestyle/pic3.jpg",
 ];
 
 const MOBILE_IMAGES = [
   "/lifestyle/pic1.jpg",
+  "/lifestyle/pic11.jpg",
+  "/lifestyle/pic13.png",
+  "/lifestyle/pic14.png",
   "/lifestyle/pic2.jpg",
-  "/lifestyle/pic4.jpg",
-  "/lifestyle/pic5.jpg",
-  "/lifestyle/pic6.jpg",
   "/lifestyle/pic7.jpg",
 ];
 

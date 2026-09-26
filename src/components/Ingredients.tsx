@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "@/components/Img";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -93,6 +94,18 @@ export default function Ingredients() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Full-width lineup banner */}
+      <div className="mt-16 md:mt-24">
+        <Image
+          src="/brand/lineup-banner.png"
+          alt="EXTRON — Clean Energy. Max Performance."
+          width={1920}
+          height={700}
+          sizes="100vw"
+          className="w-full object-cover"
+        />
       </div>
     </section>
   );
