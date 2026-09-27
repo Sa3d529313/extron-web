@@ -43,6 +43,7 @@ html {
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 body {
   overflow-x: clip;
@@ -548,17 +549,8 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 @media (max-width: 767px) {
   /* Mobile hero is now a separate slideshow component — no overrides needed */
 
-  /* Kill gap between Ingredients and Distributors */
-  #ingredients { padding-bottom: 0 !important; margin-bottom: 0 !important; padding-top: 32px !important; }
+  #ingredients { padding-bottom: 40px !important; margin-bottom: 0 !important; padding-top: 32px !important; }
   #ingredients > div > div:first-child { margin-bottom: 24px !important; }
-  #ingredients .mb-12 { margin-bottom: 16px !important; }
-  #ingredients::after {
-    content: "";
-    display: block;
-    height: 80px;
-    background: linear-gradient(180deg, var(--bg) 0%, var(--lime) 100%);
-    margin-top: 24px;
-  }
   #distributors { padding-top: 32px !important; padding-bottom: 32px !important; }
 
   /* About: less vertical padding */

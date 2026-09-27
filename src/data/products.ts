@@ -1,4 +1,4 @@
-export type Pack = { size: number; label: string; price: number; discount?: string; img?: string };
+export type Pack = { size: number; label: string; price: number; discount?: string; img?: string; comingSoon?: boolean };
 
 export type Product = {
   key: string;
@@ -42,10 +42,10 @@ export const productData: Product[] = [
       { label: "Origin", arLabel: "المنشأ", value: "Palestine" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 25, img: "/brand/6pack.png" },
-      { size: 12, label: "12 عبوة", price: 45, discount: "وفّر 10%", img: "/brand/12pack.png" },
-      { size: 24, label: "24 عبوة", price: 82, discount: "وفّر 18%", img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
     ],
+    gallery: ["/lifestyle/pic7.jpg", "/lifestyle/pic1.jpg"],
   },
   {
     key: "extron-pink",
@@ -70,9 +70,8 @@ export const productData: Product[] = [
       { label: "Volume", arLabel: "الحجم", value: "250ml" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 28, img: "/brand/6pack.png" },
-      { size: 12, label: "12 عبوة", price: 50, discount: "وفّر 11%", img: "/brand/12pack.png" },
-      { size: 24, label: "24 عبوة", price: 90, discount: "وفّر 20%", img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/brand/women-fruit.png", "/brand/women-beach.png"],
   },
@@ -99,9 +98,8 @@ export const productData: Product[] = [
       { label: "Volume", arLabel: "الحجم", value: "250ml" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 30, img: "/brand/6pack.png" },
-      { size: 12, label: "12 عبوة", price: 54, discount: "وفّر 10%", img: "/brand/12pack.png" },
-      { size: 24, label: "24 عبوة", price: 96, discount: "وفّر 20%", img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/brand/green-fruit.png", "/lifestyle/pic3.jpg", "/lifestyle/pic5.jpg"],
   },
@@ -128,10 +126,10 @@ export const productData: Product[] = [
       { label: "Best", arLabel: "الأفضل", value: "Cold" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 22, img: "/brand/6pack.png" },
-      { size: 12, label: "12 عبوة", price: 40, discount: "وفّر 9%", img: "/brand/12pack.png" },
-      { size: 24, label: "24 عبوة", price: 72, discount: "وفّر 18%", img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
     ],
+    gallery: ["/lifestyle/pic9.jpg", "/lifestyle/pic1.jpg"],
   },
   {
     key: "cola-nova",
@@ -156,10 +154,10 @@ export const productData: Product[] = [
       { label: "Best", arLabel: "الأفضل", value: "Cold" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 24, img: "/brand/6pack.png" },
-      { size: 12, label: "12 عبوة", price: 42, discount: "وفّر 12%", img: "/brand/12pack.png" },
-      { size: 24, label: "24 عبوة", price: 78, discount: "وفّر 19%", img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 35, img: "/brand/24pack.jpg" },
     ],
+    gallery: ["/lifestyle/pic8.jpg", "/lifestyle/pic1.jpg"],
   },
 ];
 

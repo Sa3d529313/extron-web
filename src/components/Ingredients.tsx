@@ -96,8 +96,8 @@ export default function Ingredients() {
         </div>
       </div>
 
-      {/* Full-width lineup banner */}
-      <div className="mt-16 md:mt-24">
+      {/* Full-width lineup banner — desktop only */}
+      <div className="mt-16 hidden md:mt-24 md:block">
         <Image
           src="/brand/lineup-banner.png"
           alt="EXTRON — Clean Energy. Max Performance."

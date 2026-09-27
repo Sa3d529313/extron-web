@@ -11,7 +11,6 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-// Wider display font for the E [X] TRON header wordmark
 const brandFont = Archivo_Black({
   weight: "400",
   subsets: ["latin"],
@@ -19,7 +18,6 @@ const brandFont = Archivo_Black({
   display: "swap",
 });
 
-// Arabic body — clean, engineered, matches "clean energy" tone
 const ar = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
@@ -27,7 +25,6 @@ const ar = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-// Readable Arabic body text paired with Montserrat
 const readexPro = Readex_Pro({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
@@ -51,6 +48,10 @@ export default function RootLayout({
       dir="rtl"
       className={`${montserrat.variable} ${ar.variable} ${brandFont.variable} ${readexPro.variable}`}
     >
+      <head>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <meta httpEquiv="X-DNS-Prefetch-Control" content="off" />
+      </head>
       <body><ScrollToTop /><SmoothScroll>{children}</SmoothScroll></body>
     </html>
   );
