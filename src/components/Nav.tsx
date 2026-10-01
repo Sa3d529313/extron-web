@@ -4,10 +4,10 @@ import Image from "@/components/Img";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const links = [
-  { href: "#products", ar: "المنتجات" },
-  { href: "#ingredients", ar: "المكونات" },
+  { href: "/extron-web/products", ar: "المنتجات" },
+  { href: "/extron-web/gallery", ar: "المعرض" },
   { href: "/extron-web/distributors", ar: "للتجار" },
-  { href: "#about", ar: "عن الشركة" },
+  { href: "/extron-web/about", ar: "عن الشركة" },
 ];
 
 export default function Nav({ forceLight = false, forceDark = false }: { forceLight?: boolean; forceDark?: boolean }) {

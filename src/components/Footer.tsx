@@ -94,9 +94,9 @@ export default function Footer() {
             </p>
             <ul className="space-y-3">
               {[
-                ["/extron-web/#products", "Products"],
-                ["/extron-web/#ingredients", "What's Inside"],
-                ["/extron-web/#about", "About"],
+                ["/extron-web/products", "Products"],
+                ["/extron-web/gallery", "Gallery"],
+                ["/extron-web/about", "About"],
               ].map(([href, en]) => (
                 <li key={en}>
                   <a

@@ -110,7 +110,7 @@ function MobileHero() {
 
         <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
           <a
-            href="#about"
+            href="/extron-web/about"
             dir="rtl"
             className="hero-mobile-cta ar inline-flex items-center justify-center gap-2 bg-white px-8 py-4 text-sm font-bold text-[#05060a] shadow-lg transition-colors active:bg-gray-200"
           >
@@ -250,14 +250,14 @@ function DesktopHero() {
             </div>
 
             <div className="hero-el mt-8 flex flex-row items-center gap-3">
-              <a href="#products" dir="rtl"
+              <a href="/extron-web/products" dir="rtl"
                 className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full px-7 py-3.5 font-black transition-shadow duration-500"
                 style={{ backgroundColor: slide.ctaPrimary.bg, color: slide.ctaPrimary.color, "--glow": slide.ctaPrimary.bg } as React.CSSProperties}
               >
                 <span className="relative ar text-base">{slide.ctaPrimary.text}</span>
                 <span dir="ltr" className="relative transition-transform duration-300 group-hover/cta:-translate-x-1">←</span>
               </a>
-              <a href="#about" dir="rtl"
+              <a href="/extron-web/about" dir="rtl"
                 className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition-all duration-500"
                 style={{
                   borderColor: slide.ctaSecondary?.borderColor || "rgba(255,255,255,0.25)",

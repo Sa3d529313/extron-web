@@ -1,10 +1,14 @@
 import Intro from "@/components/Intro";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Lineup from "@/components/Lineup";
-import Ingredients from "@/components/Ingredients";
-import About from "@/components/About";
 import Footer from "@/components/Footer";
+
+const values = [
+  { en: "Quality First", ar: "الجودة أولاً" },
+  { en: "Clean Ingredients", ar: "مكونات نظيفة" },
+  { en: "Global Standards", ar: "معايير عالمية" },
+];
+
 export default function Home() {
   return (
     <>
@@ -12,33 +16,26 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Lineup />
-        {/* Shared wrapper — unified dark bg + organic lime glow bridging both sections */}
-        <div className="ingredients-about-bridge relative" style={{ background: "linear-gradient(180deg, #0b0d13 0%, #06080e 50%, #05060a 100%)" }}>
-          {/* Organic gradient blobs bridging across the Ingredients→About junction */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-            {/* Large lime glow — left side, straddles the junction */}
-            <div className="absolute left-[-10%] w-[75%]" style={{
-              top: "8%",
-              height: "40%",
-              background: "radial-gradient(ellipse 80% 55% at 35% 55%, rgba(166,236,47,0.10), transparent 70%)",
-            }} />
-            {/* Offset accent glow — right side, slightly lower */}
-            <div className="absolute right-[-8%] w-[55%]" style={{
-              top: "14%",
-              height: "30%",
-              background: "radial-gradient(ellipse 65% 50% at 65% 50%, rgba(166,236,47,0.07), transparent 65%)",
-            }} />
-            {/* Subtle diffused fill near center */}
-            <div className="absolute left-[10%] w-[80%]" style={{
-              top: "12%",
-              height: "25%",
-              background: "radial-gradient(ellipse 60% 45% at 50% 50%, rgba(166,236,47,0.04), transparent 60%)",
-            }} />
+
+        {/* What We Stand For */}
+        <section className="relative overflow-hidden bg-[var(--bg)] py-16 md:py-32">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-8">
+            <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
+              قيمنا · What We Stand For
+            </p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
+              {values.map((v) => (
+                <div
+                  key={v.en}
+                  className="group border border-white/10 bg-white/[0.02] p-5 text-center transition-colors hover:border-[var(--lime)]/40"
+                >
+                  <p className="readex text-xl text-[var(--lime)] md:text-2xl">{v.ar}</p>
+                  <p className="display mt-2 text-xs text-white/30 uppercase">{v.en}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <Ingredients />
-          <About />
-        </div>
+        </section>
       </main>
       <Footer />
     </>

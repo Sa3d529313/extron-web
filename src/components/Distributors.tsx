@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "@/components/Img";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -82,6 +83,7 @@ export default function Distributors() {
       className="relative overflow-hidden bg-[var(--bg)] py-4 md:py-8"
     >
       <div className="relative mx-auto max-w-[1400px] px-3 sm:px-6 md:px-10">
+        {/* Lime box — relative so the 24-pack can float on it */}
         <div className="relative overflow-hidden rounded-2xl bg-[var(--lime)] p-5 sm:p-8 md:p-12 lg:p-16">
           {/* Diagonal stripes overlay */}
           <div
@@ -92,6 +94,20 @@ export default function Distributors() {
                 "repeating-linear-gradient(-45deg, #000 0, #000 30px, transparent 30px, transparent 80px)",
             }}
           ></div>
+
+          {/* 24-pack image — bottom-right of the lime box */}
+          <div
+            className="pointer-events-none absolute right-[10%] bottom-6 z-10 hidden md:block lg:bottom-10"
+            style={{ width: "36%", maxWidth: "460px" }}
+          >
+            <Image
+              src="/brand/a7a.png"
+              alt="EXTRON — 24 Pack"
+              width={600}
+              height={400}
+              className="w-full object-contain"
+            />
+          </div>
 
           <div className="relative grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-20">
             {/* Left — pitch */}

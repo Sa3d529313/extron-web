@@ -1,5 +1,7 @@
 export type Pack = { size: number; label: string; price: number; discount?: string; img?: string; comingSoon?: boolean };
 
+export type Ingredient = { ar: string; en: string; amount: string };
+
 export type Product = {
   key: string;
   src: string;
@@ -16,12 +18,14 @@ export type Product = {
   stats: { label: string; value: string; arLabel: string }[];
   packs: Pack[];
   gallery?: string[];
+  ingredients?: Ingredient[];
+  ingredientImage?: string;
 };
 
 export const productData: Product[] = [
   {
     key: "fizo",
-    src: "/brand/drink-grey.png",
+    src: "/brand/soloo/CIZO Chilled Fizzy Drink Can.png",
     detailSrc: "/brand/111.png",
     en: "FIZO · Lemon-Lime",
     ar: "فيزو",
@@ -46,10 +50,15 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/lifestyle/pic7.jpg", "/lifestyle/pic1.jpg"],
+    ingredients: [
+      { ar: "نكهة ليمون طبيعية", en: "Natural Lemon Flavor", amount: "—" },
+      { ar: "بدون مواد حافظة", en: "No Preservatives", amount: "0" },
+      { ar: "بدون ألوان اصطناعية", en: "No Artificial Colors", amount: "0" },
+    ],
   },
   {
     key: "extron-pink",
-    src: "/brand/drink-pink.png",
+    src: "/brand/soloo/Wet EXTRON Magenta Energy Can.png",
     detailSrc: "/brand/444.png",
     en: "EXTRON for Women",
     ar: "إكسترون للسيدات",
@@ -74,10 +83,18 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/brand/women-fruit.png", "/brand/women-beach.png"],
+    ingredientImage: "/122333.png",
+    ingredients: [
+      { ar: "كافيين نباتي", en: "Plant Caffeine", amount: "80mg" },
+      { ar: "فيتامين B6 + B12", en: "Vitamin B6 + B12", amount: "مركّب" },
+      { ar: "مضادات أكسدة", en: "Antioxidants", amount: "—" },
+      { ar: "زنك + فيتامين D", en: "Zinc + Vitamin D", amount: "—" },
+      { ar: "بدون سكر مضاف", en: "Zero Added Sugar", amount: "0g" },
+    ],
   },
   {
     key: "extron-green",
-    src: "/brand/drink-green.png",
+    src: "/brand/soloo/Chilled EXTRON Energy Drink Can.png",
     detailSrc: "/brand/DAMN1.png",
     en: "EXTRON Original",
     ar: "إكسترون الأخضر",
@@ -102,10 +119,19 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/brand/green-fruit.png", "/lifestyle/pic3.jpg", "/lifestyle/pic5.jpg"],
+    ingredientImage: "/brand/112233.png",
+    ingredients: [
+      { ar: "كافيين نباتي", en: "Plant Caffeine", amount: "108mg" },
+      { ar: "توراين", en: "Taurine", amount: "1000mg" },
+      { ar: "جينسنغ", en: "Ginseng", amount: "50mg" },
+      { ar: "غوارانا", en: "Guarana", amount: "40mg" },
+      { ar: "فيتامينات ب المركّبة", en: "B-Vitamins", amount: "مركّب" },
+      { ar: "بدون سكر مضاف", en: "Zero Added Sugar", amount: "0g" },
+    ],
   },
   {
     key: "for-us",
-    src: "/brand/drink-orange.png",
+    src: "/brand/soloo/Condensed Orange Soda Can with Citrus Graphics.png",
     detailSrc: "/brand/222.png",
     en: "FOR US · Orange",
     ar: "فور أص",
@@ -130,10 +156,15 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/lifestyle/pic9.jpg", "/lifestyle/pic1.jpg"],
+    ingredients: [
+      { ar: "نكهة برتقال طبيعية", en: "Natural Orange Flavor", amount: "—" },
+      { ar: "بدون مواد حافظة", en: "No Preservatives", amount: "0" },
+      { ar: "بدون ألوان اصطناعية", en: "No Artificial Colors", amount: "0" },
+    ],
   },
   {
     key: "cola-nova",
-    src: "/brand/drink-red.png",
+    src: "/brand/soloo/Dewy Red Cola Can Advertisement.png",
     detailSrc: "/brand/333.png",
     en: "COLA NOVA",
     ar: "كولا نوفا",
@@ -158,6 +189,11 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 35, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/lifestyle/pic8.jpg", "/lifestyle/pic1.jpg"],
+    ingredients: [
+      { ar: "نكهة كولا طبيعية", en: "Natural Cola Flavor", amount: "—" },
+      { ar: "فقاعات طبيعية", en: "Natural Carbonation", amount: "—" },
+      { ar: "بدون مواد حافظة", en: "No Preservatives", amount: "0" },
+    ],
   },
 ];
 

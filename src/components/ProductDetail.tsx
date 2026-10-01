@@ -64,7 +64,7 @@ export default function ProductDetail({
 
   return (
     <>
-      <div className="mx-auto max-w-[1600px] px-6 pt-24 pb-14 md:px-10 md:pt-26 md:pb-20" style={{ "--product-accent": p.accent } as CSSProperties}>
+      <div className="mx-auto max-w-[1600px] px-6 pt-24 pb-0 md:px-10 md:pt-26 md:pb-0" style={{ "--product-accent": p.accent } as CSSProperties}>
         {/* Breadcrumb */}
         <nav
           className="mb-6 flex items-center gap-2 text-xs text-black/35"
@@ -78,7 +78,7 @@ export default function ProductDetail({
           </a>
           <span>›</span>
           <a
-            href="/extron-web/#products"
+            href="/extron-web/products"
             className="readex transition-colors hover:text-black/60"
           >
             المنتجات
@@ -301,22 +301,76 @@ export default function ProductDetail({
               {isComingSoon ? "هذه العبوة ستتوفر قريباً — اختر عبوة 24 للطلب الآن" : "تواصل مباشرة مع فريق المبيعات للطلب والاستفسار"}
             </p>
 
-            <div className="readex mt-7 space-y-3 text-[13px] leading-[2] text-black/65">
-              {p.key === "extron-green" ? (
-                <>
-                  <p>
-                    بطعم لذيذ وروح مستوحاة من الطبيعة، يجمع إكسترون بين الكافيين النباتي الطبيعي والجينسنغ والغوارانا والمتّة. تركيبة ترافق إيقاع يومك، من ساعات الدراسة والعمل إلى لحظات النشاط والتحدّي.
-                  </p>
-                  <p>
-                    طاقة من مصادر نباتية، وتجربة تتجاوز المذاق التقليدي لمشروبات الطاقة. وتقدّم عائلة إكسترون نكهات متنوعة، منها <strong className="font-semibold text-black/85">الليمون والمانجو والكيوي</strong>، لتجد الطعم الذي يشبهك.
-                  </p>
-                  <p className="readex text-base font-bold text-black">إكسترون — استمدّ طاقتك من الطبيعة!</p>
-                </>
-              ) : (
-                <p>{p.arDesc}</p>
-              )}
-            </div>
 
+          </div>
+        </div>
+      </div>
+
+      {/* ─── INGREDIENTS ─── */}
+      {p.ingredientImage ? (
+        <div className="bg-white">
+          <div className="mx-auto max-w-[1600px] px-6 pt-0 pb-2 md:px-10 md:pt-0 md:pb-3">
+            <div className="mb-2 flex items-center justify-between">
+              <p className="readex text-lg font-semibold text-black/80" dir="rtl">المكونات</p>
+              <p className="space text-[11px] font-medium uppercase tracking-[0.15em] text-black/30" dir="ltr">WHAT&apos;S INSIDE</p>
+            </div>
+            <Image
+              src={p.ingredientImage}
+              alt={`${p.en} — المكونات`}
+              width={1600}
+              height={500}
+              sizes="95vw"
+              className="w-full object-contain"
+            />
+          </div>
+        </div>
+      ) : p.ingredients && p.ingredients.length > 0 ? (
+        <div className="border-t border-black/8 bg-neutral-50/50">
+          <div className="mx-auto max-w-[1300px] px-6 py-12 md:px-12 md:py-16">
+            <div className="mb-6 flex items-center justify-between">
+              <p className="readex text-lg font-semibold text-black/80" dir="rtl">المكونات</p>
+              <p className="space text-[11px] font-medium uppercase tracking-[0.15em] text-black/30" dir="ltr">WHAT&apos;S INSIDE</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:gap-4">
+              {p.ingredients.map((ing) => (
+                <div
+                  key={ing.en}
+                  className="group border border-black/8 bg-white p-4 transition-colors hover:border-black/15 md:p-5"
+                  style={{ borderLeftColor: p.accent, borderLeftWidth: "3px" }}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="readex text-sm font-semibold text-black/80">{ing.ar}</p>
+                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-black/40">{ing.en}</p>
+                    </div>
+                    {ing.amount !== "—" && ing.amount !== "0" && (
+                      <span className="space shrink-0 text-sm font-bold" style={{ color: p.accent }}>{ing.amount}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {/* ─── DESCRIPTION ─── */}
+      <div className="bg-white">
+        <div className="mx-auto max-w-[1300px] px-6 py-10 md:px-12 md:py-14" dir="rtl">
+          <div className="readex space-y-3 text-[14px] leading-[2] text-black/65 md:text-[15px]">
+            {p.key === "extron-green" ? (
+              <>
+                <p>
+                  بطعم لذيذ وروح مستوحاة من الطبيعة، يجمع إكسترون بين الكافيين النباتي الطبيعي والجينسنغ والغوارانا والمتّة. تركيبة ترافق إيقاع يومك، من ساعات الدراسة والعمل إلى لحظات النشاط والتحدّي.
+                </p>
+                <p>
+                  طاقة من مصادر نباتية، وتجربة تتجاوز المذاق التقليدي لمشروبات الطاقة. وتقدّم عائلة إكسترون نكهات متنوعة، منها <strong className="font-semibold text-black/85">الليمون والمانجو والكيوي</strong>، لتجد الطعم الذي يشبهك.
+                </p>
+                <p className="readex text-base font-bold text-black">إكسترون — استمدّ طاقتك من الطبيعة!</p>
+              </>
+            ) : (
+              <p>{p.arDesc}</p>
+            )}
           </div>
         </div>
       </div>
@@ -332,7 +386,7 @@ export default function ProductDetail({
               YOU MIGHT ALSO LIKE
             </p>
             <a
-              href="/extron-web/#products"
+              href="/extron-web/products"
               className="space text-[11px] font-medium uppercase tracking-[0.1em] text-black/25 transition-colors hover:text-black/50"
               dir="ltr"
             >
