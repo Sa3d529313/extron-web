@@ -71,7 +71,15 @@ export default function Distributors() {
         scrollTrigger: { trigger: ref.current, start: "top 65%" },
       });
     }, ref);
-    return () => ctx.revert();
+
+    const cards = ref.current?.querySelectorAll(".perk-card");
+    if (!cards?.length) return () => ctx.revert();
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("revealed"); io.unobserve(e.target); } }),
+      { threshold: 0.15 },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => { ctx.revert(); io.disconnect(); };
   }, []);
 
   const canSubmit = shopName.trim() && phone.trim() && city;
