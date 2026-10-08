@@ -59,7 +59,7 @@ export default function ProductDetail({
   const related = products.filter((_, i) => i !== current);
 
   const switchProduct = (i: number) => {
-    window.location.href = `/extron-web/products/${products[i].key}`;
+    window.location.href = `/products/${products[i].key}`;
   };
 
   return (
@@ -71,14 +71,14 @@ export default function ProductDetail({
           dir="rtl"
         >
           <a
-            href="/extron-web/"
+            href="/"
             className="readex transition-colors hover:text-black/60"
           >
             الرئيسية
           </a>
           <span>›</span>
           <a
-            href="/extron-web/products"
+            href="/products"
             className="readex transition-colors hover:text-black/60"
           >
             المنتجات
@@ -386,7 +386,7 @@ export default function ProductDetail({
               YOU MIGHT ALSO LIKE
             </p>
             <a
-              href="/extron-web/products"
+              href="/products"
               className="space text-[11px] font-medium uppercase tracking-[0.1em] text-black/25 transition-colors hover:text-black/50"
               dir="ltr"
             >

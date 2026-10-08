@@ -4,10 +4,10 @@ import Image from "@/components/Img";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const links = [
-  { href: "/extron-web/products", ar: "المنتجات" },
-  { href: "/extron-web/gallery", ar: "المعرض" },
-  { href: "/extron-web/distributors", ar: "للتجار" },
-  { href: "/extron-web/about", ar: "عن الشركة" },
+  { href: "/products", ar: "المنتجات" },
+  { href: "/gallery", ar: "المعرض" },
+  { href: "/distributors", ar: "للتجار" },
+  { href: "/about", ar: "عن الشركة" },
 ];
 
 export default function Nav({ forceLight = false, forceDark = false }: { forceLight?: boolean; forceDark?: boolean }) {
@@ -103,7 +103,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
           {/* CENTER — Logo */}
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a
-            href="/extron-web/"
+            href="/"
             aria-label="EXTRON — الصفحة الرئيسية"
             className="flex items-center justify-center"
             style={{ gridColumn: 2 }}
@@ -150,7 +150,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
           {/* RIGHT — CTA + hamburger */}
           <div className="flex items-center justify-end gap-3 md:gap-5" style={{ gridColumn: 3 }}>
             <a
-              href="/extron-web/distributors"
+              href="/distributors"
               dir="rtl"
               className="cta-lime hidden items-center gap-2 px-5 py-2.5 text-sm font-black md:inline-flex"
               style={{
@@ -231,7 +231,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
               </a>
             ))}
             <a
-              href="/extron-web/distributors"
+              href="/distributors"
               onClick={() => setOpen(false)}
               dir="rtl"
               className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--lime)] px-5 py-3 text-sm font-black text-black"

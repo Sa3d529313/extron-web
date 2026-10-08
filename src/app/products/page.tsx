@@ -33,7 +33,7 @@ export default function ProductsPage() {
             {products.map((p, i) => (
               <a
                 key={p.key}
-                href={`/extron-web/products/${p.key}`}
+                href={`/products/${p.key}`}
                 className="product-card group flex flex-col overflow-hidden border bg-[#fafaf8] p-3 transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.04] hover:shadow-[0_20px_60px_rgba(0,0,0,0.18)] md:p-4"
                 style={{ borderColor: p.accent + "40", "--card-glow": p.accent } as React.CSSProperties}
               >

@@ -94,9 +94,9 @@ export default function Footer() {
             </p>
             <ul className="space-y-3">
               {[
-                ["/extron-web/products", "Products"],
-                ["/extron-web/gallery", "Gallery"],
-                ["/extron-web/about", "About"],
+                ["/products", "Products"],
+                ["/gallery", "Gallery"],
+                ["/about", "About"],
               ].map(([href, en]) => (
                 <li key={en}>
                   <a
@@ -117,7 +117,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="/extron-web/distributors"
+                  href="/distributors"
                   className="text-sm font-bold text-white hover:text-[var(--lime)]"
                 >
                   Distribution

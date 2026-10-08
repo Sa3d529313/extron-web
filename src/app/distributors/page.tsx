@@ -13,7 +13,7 @@ export default function DistributorsPage() {
       <main className="min-h-screen bg-[var(--bg)]">
         {/* Intro above the form */}
         <div className="mx-auto max-w-[1400px] px-5 pt-24 pb-8 md:px-10 md:pt-28 md:pb-16">
-          <a href="/extron-web/" className="ar mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[var(--lime)]" dir="rtl">
+          <a href="/" className="ar mb-8 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[var(--lime)]" dir="rtl">
             <span dir="ltr">→</span>
             <span>العودة للرئيسية</span>
           </a>
