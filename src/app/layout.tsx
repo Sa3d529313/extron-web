@@ -32,11 +32,49 @@ const readexPro = Readex_Pro({
   display: "swap",
 });
 
+const siteDescription =
+  "EXTRON — إكسترون فلسطين، علامة مشروبات الطاقة النظيفة. Extron Palestine energy drinks and premium beverages — for distributors, supermarkets, cafés, and restaurants across Palestine.";
+
 export const metadata: Metadata = {
-  title: "EXTRON — Clean Energy Drink · طاقة نظيفة",
-  description:
-    "EXTRON — علامة مشروبات الطاقة النظيفة. Extron energy drinks and premium beverages — for distributors, supermarkets, cafés, and restaurants across Palestine.",
+  metadataBase: new URL("https://extron.ps"),
+  title: "EXTRON Palestine — Clean Energy Drink · إكسترون فلسطين",
+  description: siteDescription,
+  keywords: [
+    "Extron",
+    "Extron Palestine",
+    "Extron energy drink",
+    "إكسترون",
+    "اكسترون",
+    "إكسترون فلسطين",
+    "مشروب طاقة",
+    "مشروبات الطاقة فلسطين",
+    "energy drink Palestine",
+  ],
   icons: { icon: "/brand/logo-black.jpg" },
+  openGraph: {
+    type: "website",
+    url: "https://extron.ps",
+    siteName: "EXTRON",
+    title: "EXTRON Palestine — Clean Energy Drink · إكسترون فلسطين",
+    description: siteDescription,
+    locale: "ar_PS",
+    images: ["/brand/hero-slide-1.png"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "EXTRON",
+  alternateName: ["Extron Palestine", "إكسترون", "إكسترون فلسطين"],
+  url: "https://extron.ps",
+  logo: "https://extron.ps/brand/logo-black.jpg",
+  description: siteDescription,
+  areaServed: "Palestine",
+  sameAs: [
+    "https://www.instagram.com/extron.ps",
+    "https://www.facebook.com/share/1GFFydHPL7/",
+  ],
 };
 
 export default function RootLayout({
@@ -51,6 +89,10 @@ export default function RootLayout({
       <head>
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <meta httpEquiv="X-DNS-Prefetch-Control" content="off" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
       <body><ScrollToTop /><SmoothScroll>{children}</SmoothScroll></body>
     </html>
