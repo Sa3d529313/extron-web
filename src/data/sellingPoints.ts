@@ -105,6 +105,31 @@ export const SELLING_POINTS: SellingPoint[] = ALL_POINTS.filter((p) =>
   CITIES.some((c) => c.id === p.cityId),
 );
 
+/** Great-circle distance in km. */
+export function distanceKm(a: LatLng, b: LatLng): number {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(b[0] - a[0]);
+  const dLng = toRad(b[1] - a[1]);
+  const h =
+    Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a[0])) * Math.cos(toRad(b[0])) * Math.sin(dLng / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(h));
+}
+
+export function formatDistance(km: number): string {
+  if (km < 1) return `${Math.max(50, Math.round((km * 1000) / 50) * 50)} م`;
+  if (km < 10) return `${km.toFixed(1)} كم`;
+  return `${Math.round(km)} كم`;
+}
+
+export function nearestPoint(from: LatLng, points: SellingPoint[]): { point: SellingPoint; km: number } | null {
+  let best: { point: SellingPoint; km: number } | null = null;
+  for (const point of points) {
+    const km = distanceKm(from, [point.lat, point.lng]);
+    if (!best || km < best.km) best = { point, km };
+  }
+  return best;
+}
+
 export function googleMapsUrl(point: SellingPoint): string {
   if (point.mapsUrl) return point.mapsUrl;
   if (point.exact) {
