@@ -250,7 +250,6 @@ function PointCard({ point, onClose }: { point: SellingPoint; onClose: () => voi
           src={encodeURI(point.image)}
           alt={point.name}
           className="h-40 w-full object-cover md:h-48"
-          loading="lazy"
         />
       )}
 
