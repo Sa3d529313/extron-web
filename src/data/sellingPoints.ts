@@ -65,14 +65,14 @@ const ALL_POINTS: SellingPoint[] = [
   { id: "nb-pita-bite", cityId: "nablus", name: "مطعم بيتا بايت", type: "restaurant", area: "رفيديا", lat: 32.2268, lng: 35.2379 },
   { id: "nb-palestine-rest", cityId: "nablus", name: "مطعم فلسطين", type: "restaurant", area: "شارع فلسطين", lat: 32.2198, lng: 35.2571 },
   { id: "nb-qasr-fitness", cityId: "nablus", name: "نادي قصر اللياقة", type: "gym", area: "رفيديا", lat: 32.2292, lng: 35.2352 },
-  { id: "nb-salous", cityId: "nablus", name: "سلعوس هايبر", type: "supermarket", area: "بيت إيبا", lat: 32.2289, lng: 35.1961, image: "/locations/Screenshot 2026-09-04 021951.png" },
-  { id: "nb-rafidia-mall", cityId: "nablus", name: "رفيديا مول", type: "supermarket", area: "رفيديا", lat: 32.2259, lng: 35.2433, image: "/locations/Screenshot 2026-09-04 021955.png" },
-  { id: "nb-antalya", cityId: "nablus", name: "سوبر ماركت أنطاليا", type: "supermarket", area: "رفيديا", lat: 32.2275, lng: 35.2343, phones: ["0568245233", "0592699259"], image: "/locations/Screenshot 2026-09-04 021958.png" },
-  { id: "nb-awael", cityId: "nablus", name: "سوبر ماركت العائلات", type: "supermarket", area: "رفيديا", lat: 32.2265, lng: 35.2448, image: "/locations/Screenshot 2026-09-04 022001.png" },
-  { id: "nb-beit-alkaram", cityId: "nablus", name: "سوبرماركت بيت الكرم", type: "supermarket", area: "العامرية", lat: 32.2246, lng: 35.2318, image: "/locations/Screenshot 2026-09-04 022006.png" },
-  { id: "nb-basha-mall", cityId: "nablus", name: "الباشا مول", type: "supermarket", area: "راس العين", lat: 32.2168, lng: 35.2552, image: "/locations/Screenshot 2026-09-04 022009.png" },
-  { id: "nb-mousa-rest", cityId: "nablus", name: "سوبر ماركت واستراحة موسى", type: "supermarket", area: "دير شرف", lat: 32.2513, lng: 35.1771, image: "/locations/Screenshot 2026-09-04 022016.png" },
-  { id: "nb-alnuha", cityId: "nablus", name: "سوبرماركت النهى", type: "supermarket", area: "قوصين - وسط البلد", lat: 32.2347, lng: 35.1876, image: "/locations/Screenshot 2026-09-04 022019.png" },
+  { id: "nb-salous", cityId: "nablus", name: "سلعوس هايبر", type: "supermarket", area: "بيت إيبا", lat: 32.2289, lng: 35.1961, image: "/locations/cards/nb-salous.jpg" },
+  { id: "nb-rafidia-mall", cityId: "nablus", name: "رفيديا مول", type: "supermarket", area: "رفيديا", lat: 32.2259, lng: 35.2433, image: "/locations/cards/nb-rafidia-mall.jpg" },
+  { id: "nb-antalya", cityId: "nablus", name: "سوبر ماركت أنطاليا", type: "supermarket", area: "رفيديا", lat: 32.2275, lng: 35.2343, phones: ["0568245233", "0592699259"], image: "/locations/cards/nb-antalya.jpg" },
+  { id: "nb-awael", cityId: "nablus", name: "سوبر ماركت العائلات", type: "supermarket", area: "رفيديا", lat: 32.2265, lng: 35.2448, image: "/locations/cards/nb-awael.jpg" },
+  { id: "nb-beit-alkaram", cityId: "nablus", name: "سوبرماركت بيت الكرم", type: "supermarket", area: "العامرية", lat: 32.2246, lng: 35.2318, image: "/locations/cards/nb-beit-alkaram.jpg" },
+  { id: "nb-basha-mall", cityId: "nablus", name: "الباشا مول", type: "supermarket", area: "راس العين", lat: 32.2168, lng: 35.2552, image: "/locations/cards/nb-basha-mall.jpg" },
+  { id: "nb-mousa-rest", cityId: "nablus", name: "سوبر ماركت واستراحة موسى", type: "supermarket", area: "دير شرف", lat: 32.2513, lng: 35.1771, image: "/locations/cards/nb-mousa-rest.jpg" },
+  { id: "nb-alnuha", cityId: "nablus", name: "سوبرماركت النهى", type: "supermarket", area: "قوصين - وسط البلد", lat: 32.2347, lng: 35.1876, image: "/locations/cards/nb-alnuha.jpg" },
   { id: "nb-tal-akhdar", cityId: "nablus", name: "سوبرماركت التل الأخضر", type: "supermarket", area: "رفيديا", lat: 32.2279, lng: 35.2366 },
   { id: "nb-aswaq-amariya", cityId: "nablus", name: "أسواق العامرية", type: "supermarket", area: "العامرية - حي طيبة", lat: 32.2236, lng: 35.2296 },
   { id: "nb-malhas", cityId: "nablus", name: "سوبرماركت ملحس", type: "supermarket", area: "شارع غرناطة / الدوار", lat: 32.2213, lng: 35.2604 },
@@ -85,9 +85,9 @@ const ALL_POINTS: SellingPoint[] = [
   { id: "nb-rukn-almusafir", cityId: "nablus", name: "كفتيريا ركن المسافر", type: "cafe", area: "المجمع الغربي", lat: 32.2226, lng: 35.2488 },
   { id: "nb-subuh", cityId: "nablus", name: "سوبر ماركت صبح", type: "supermarket", area: "المجمع الغربي", lat: 32.2221, lng: 35.2497 },
   { id: "nb-wadi", cityId: "nablus", name: "أسواق الوادي الاستهلاكية", type: "supermarket", area: "التعاون - شارع التعاون العلوي، نابلس الجديدة", lat: 32.2331, lng: 35.2412 },
-  { id: "nb-brazili", cityId: "nablus", name: "سوبرماركت وبن البرازيلي", type: "supermarket", area: "شارع العدل - سفيان", lat: 32.2187, lng: 35.2648, image: "/locations/Screenshot 2026-09-04 022036.png" },
-  { id: "nb-family-tur", cityId: "nablus", name: "سوبرماركت فاميلي ستورز (بيت الكل)", type: "supermarket", area: "الطور", lat: 32.2011, lng: 35.2731, image: "/locations/Screenshot 2026-09-04 022039.png" },
-  { id: "nb-family-ras", cityId: "nablus", name: "سوبرماركت فاميلي ستورز (بيت الكل)", type: "supermarket", area: "راس العين", lat: 32.2161, lng: 35.2536, image: "/locations/Screenshot 2026-09-04 022043.png" },
+  { id: "nb-brazili", cityId: "nablus", name: "سوبرماركت وبن البرازيلي", type: "supermarket", area: "شارع العدل - سفيان", lat: 32.2187, lng: 35.2648, image: "/locations/cards/nb-brazili.jpg" },
+  { id: "nb-family-tur", cityId: "nablus", name: "سوبرماركت فاميلي ستورز (بيت الكل)", type: "supermarket", area: "الطور", lat: 32.2011, lng: 35.2731, image: "/locations/cards/nb-family-tur.jpg" },
+  { id: "nb-family-ras", cityId: "nablus", name: "سوبرماركت فاميلي ستورز (بيت الكل)", type: "supermarket", area: "راس العين", lat: 32.2161, lng: 35.2536, image: "/locations/cards/nb-family-ras.jpg" },
   { id: "nb-basma-mall", cityId: "nablus", name: "البسمة مول", type: "supermarket", area: "شارع القدس", lat: 32.2163, lng: 35.2788 },
   { id: "nb-mukhtar", cityId: "nablus", name: "سوبر ماركت المختار", type: "supermarket", area: "شارع القدس", lat: 32.2171, lng: 35.2771 },
 
@@ -96,9 +96,9 @@ const ALL_POINTS: SellingPoint[] = [
   { id: "qq-dream-mall", cityId: "qalqilya", name: "دريم مول", type: "supermarket", area: "قلقيلية", lat: 32.1889, lng: 34.9719 },
 
   // ── Jenin (hidden until Jenin is added to CITIES) ───────
-  { id: "jn-saad-aldin", cityId: "jenin", name: "سوبر ماركت سعد الدين", type: "supermarket", area: "شارع الناصرة", lat: 32.4641, lng: 35.2962, image: "/locations/Screenshot 2026-09-04 022024.png" },
-  { id: "jn-laith-mall", cityId: "jenin", name: "الليث مول", type: "supermarket", area: "شارع الناصرة", lat: 32.4652, lng: 35.2971, image: "/locations/Screenshot 2026-09-04 022028.png" },
-  { id: "jn-muslimani", cityId: "jenin", name: "محامص سعد المسلماني", type: "roastery", area: "شارع حيفا", lat: 32.4609, lng: 35.2884, image: "/locations/Screenshot 2026-09-04 022032.png" },
+  { id: "jn-saad-aldin", cityId: "jenin", name: "سوبر ماركت سعد الدين", type: "supermarket", area: "شارع الناصرة", lat: 32.4641, lng: 35.2962, image: "/locations/cards/jn-saad-aldin.jpg" },
+  { id: "jn-laith-mall", cityId: "jenin", name: "الليث مول", type: "supermarket", area: "شارع الناصرة", lat: 32.4652, lng: 35.2971, image: "/locations/cards/jn-laith-mall.jpg" },
+  { id: "jn-muslimani", cityId: "jenin", name: "محامص سعد المسلماني", type: "roastery", area: "شارع حيفا", lat: 32.4609, lng: 35.2884, image: "/locations/cards/jn-muslimani.jpg" },
 ];
 
 export const SELLING_POINTS: SellingPoint[] = ALL_POINTS.filter((p) =>
