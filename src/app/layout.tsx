@@ -50,7 +50,6 @@ export const metadata: Metadata = {
     "مشروبات الطاقة فلسطين",
     "energy drink Palestine",
   ],
-  icons: { icon: "/brand/logo-black.jpg" },
   openGraph: {
     type: "website",
     url: "https://extron.ps",

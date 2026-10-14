@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const links = [
   { href: "/products", ar: "المنتجات" },
   { href: "/gallery", ar: "المعرض" },
+  { href: "/selling-points", ar: "نقاط البيع" },
   { href: "/distributors", ar: "للتجار" },
   { href: "/about", ar: "عن الشركة" },
 ];
@@ -81,13 +82,13 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
           }}
         >
           {/* LEFT — Nav links (desktop) / empty on mobile */}
-          <nav className="hidden items-center justify-start md:flex" style={{ gridColumn: 1 }}>
+          <nav className="hidden items-center justify-start xl:flex" style={{ gridColumn: 1 }}>
             <div className="flex items-center gap-1" style={{ "--nav-accent": isLight ? "#05060a" : "#fff" } as React.CSSProperties}>
               {links.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
-                  className="nav-link-floating ar relative px-5 py-2 text-[15px] font-bold"
+                  className="nav-link-floating ar relative whitespace-nowrap px-5 py-2 text-[15px] font-bold"
                   style={{
                     color: isLight ? "#05060a" : "rgba(255,255,255,0.85)",
                     transition: "color 300ms ease",
@@ -152,7 +153,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
             <a
               href="/distributors"
               dir="rtl"
-              className="cta-lime hidden items-center gap-2 px-5 py-2.5 text-sm font-black md:inline-flex"
+              className="cta-lime hidden items-center gap-2 px-5 py-2.5 text-sm font-black xl:inline-flex"
               style={{
                 backgroundColor: "var(--lime)",
                 color: "#000",
@@ -165,7 +166,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
             <button
               aria-label="القائمة"
               onClick={() => setOpen((s) => !s)}
-              className="grid h-11 w-11 place-items-center md:hidden"
+              className="grid h-11 w-11 place-items-center xl:hidden"
             >
               <div className="flex flex-col gap-[6px]">
                 <span
@@ -195,7 +196,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
       {/* Mobile drawer — rendered BELOW the bar */}
       {open && (
         <div
-          className="relative z-50 md:hidden"
+          className="relative z-50 xl:hidden"
           style={{
             borderRadius: "0 0 14px 14px",
             backgroundColor: isLight

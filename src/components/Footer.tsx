@@ -96,6 +96,7 @@ export default function Footer() {
               {[
                 ["/products", "Products"],
                 ["/gallery", "Gallery"],
+                ["/selling-points", "Selling Points"],
                 ["/about", "About"],
               ].map(([href, en]) => (
                 <li key={en}>
