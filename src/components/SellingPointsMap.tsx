@@ -4,13 +4,15 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./SellingPointsMap.css";
-import type { City, SellingPoint } from "@/data/sellingPoints";
+import type { City, LatLng, PointType, SellingPoint } from "@/data/sellingPoints";
+import { typeIconSvg } from "./SellingPointIcons";
 
 type Props = {
   cities: City[];
   city: City | null;
   points: SellingPoint[];
   selectedId: string | null;
+  userLocation: LatLng | null;
   onSelect: (id: string) => void;
   onBackgroundClick: () => void;
 };
@@ -19,13 +21,17 @@ const CITY_RING_METERS = 2500;
 const CITY_MAX_ZOOM = 15;
 const EMPTY_CITY_ZOOM = 12;
 const FOCUS_ZOOM = 15;
+const PIN_HEIGHT = 44;
+// Phone layout: type-filter bar at the top, info card (max 62% high) at the bottom.
+const MOBILE_TOP_INSET = 60;
+const MOBILE_CARD_SHARE = 0.62;
 
-function pinIcon(active: boolean) {
+function pinIcon(type: PointType, active: boolean) {
   return L.divIcon({
     className: `sp-pin${active ? " sp-pin--active" : ""}`,
-    html: '<span class="sp-pin__head"><span class="sp-pin__dot"></span></span>',
-    iconSize: [30, 40],
-    iconAnchor: [15, 40],
+    html: `<span class="sp-pin__head"><span class="sp-pin__icon">${typeIconSvg(type)}</span></span>`,
+    iconSize: [34, 44],
+    iconAnchor: [17, 44],
   });
 }
 
@@ -33,16 +39,48 @@ function cityLabelIcon(name: string) {
   const label = document.createElement("span");
   label.className = "sp-city__label";
   label.textContent = name;
-  return L.divIcon({
-    className: "sp-city",
-    html: label.outerHTML,
-    iconSize: [0, 0],
-  });
+  return L.divIcon({ className: "sp-city", html: label.outerHTML, iconSize: [0, 0] });
 }
+
+const userIcon = () =>
+  L.divIcon({
+    className: "sp-user",
+    html: '<span class="sp-user__pulse"></span><span class="sp-user__dot"></span>',
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+  });
 
 // Animate only when the user can see it: hidden tabs pause animation frames, which would freeze a flight half-way.
 function shouldAnimate() {
   return !document.hidden && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/**
+ * Runs a map flight, and if it hasn't finished shortly after its duration
+ * (e.g. the browser throttled animation frames), jumps straight to the end
+ * so the map is never left half-way.
+ */
+function guardedFlight(
+  map: L.Map,
+  timerRef: { current: ReturnType<typeof setTimeout> | null },
+  durationSec: number,
+  fly: (animate: boolean) => void,
+) {
+  if (timerRef.current) clearTimeout(timerRef.current);
+  map.stop();
+  const animate = shouldAnimate();
+  let finished = false;
+  map.once("moveend", () => {
+    finished = true;
+  });
+  fly(animate);
+  if (!animate) return;
+  timerRef.current = setTimeout(() => {
+    timerRef.current = null;
+    if (finished) return;
+    map.stop();
+    fly(false);
+  }, durationSec * 1000 + 700);
 }
 
 export default function SellingPointsMap({
@@ -50,6 +88,7 @@ export default function SellingPointsMap({
   city,
   points,
   selectedId,
+  userLocation,
   onSelect,
   onBackgroundClick,
 }: Props) {
@@ -57,7 +96,9 @@ export default function SellingPointsMap({
   const mapRef = useRef<L.Map | null>(null);
   const pointsLayerRef = useRef<L.LayerGroup | null>(null);
   const cityLayerRef = useRef<L.LayerGroup | null>(null);
-  const markersRef = useRef<Map<string, L.Marker>>(new Map());
+  const userLayerRef = useRef<L.LayerGroup | null>(null);
+  const markersRef = useRef<Map<string, { marker: L.Marker; type: PointType }>>(new Map());
+  const flightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onSelectRef = useRef(onSelect);
   const onBackgroundClickRef = useRef(onBackgroundClick);
 
@@ -85,21 +126,25 @@ export default function SellingPointsMap({
     }).addTo(map);
 
     cityLayerRef.current = L.layerGroup().addTo(map);
+    userLayerRef.current = L.layerGroup().addTo(map);
     pointsLayerRef.current = L.layerGroup().addTo(map);
     map.on("click", () => onBackgroundClickRef.current());
     mapRef.current = map;
 
     const markers = markersRef.current;
+    const flightTimer = flightTimerRef;
     const resizeObserver = new ResizeObserver(() => map.invalidateSize());
     resizeObserver.observe(el);
 
     return () => {
+      if (flightTimer.current) clearTimeout(flightTimer.current);
       resizeObserver.disconnect();
       markers.clear();
       map.remove();
       mapRef.current = null;
       pointsLayerRef.current = null;
       cityLayerRef.current = null;
+      userLayerRef.current = null;
     };
   }, [cities]);
 
@@ -112,7 +157,7 @@ export default function SellingPointsMap({
 
     for (const point of points) {
       const marker = L.marker([point.lat, point.lng], {
-        icon: pinIcon(false),
+        icon: pinIcon(point.type, false),
         title: point.name,
         alt: point.name,
         riseOnHover: true,
@@ -125,9 +170,19 @@ export default function SellingPointsMap({
         }
       });
       marker.addTo(layer);
-      markersRef.current.set(point.id, marker);
+      markersRef.current.set(point.id, { marker, type: point.type });
     }
   }, [points]);
+
+  // Show where the visitor is (after "nearest to me").
+  useEffect(() => {
+    const layer = userLayerRef.current;
+    if (!layer) return;
+    layer.clearLayers();
+    if (userLocation) {
+      L.marker(userLocation, { icon: userIcon(), interactive: false, keyboard: false, zIndexOffset: 500 }).addTo(layer);
+    }
+  }, [userLocation]);
 
   // Move to the selected city and mark it.
   useEffect(() => {
@@ -135,15 +190,12 @@ export default function SellingPointsMap({
     const layer = cityLayerRef.current;
     if (!map || !layer) return;
     layer.clearLayers();
-    map.stop();
-    const animate = shouldAnimate();
 
     if (!city) {
-      map.flyToBounds(L.latLngBounds(cities.map((c) => c.center)), {
-        padding: [40, 40],
-        animate,
-        duration: 1.2,
-      });
+      const all = L.latLngBounds(cities.map((c) => c.center));
+      guardedFlight(map, flightTimerRef, 1.2, (animate) =>
+        map.flyToBounds(all, { padding: [40, 40], animate, duration: 1.2 }),
+      );
       return;
     }
 
@@ -163,18 +215,22 @@ export default function SellingPointsMap({
 
     const cityPoints = points.filter((p) => p.cityId === city.id);
     if (cityPoints.length === 0) {
-      map.flyTo(city.center, EMPTY_CITY_ZOOM, { animate, duration: 1.2 });
+      guardedFlight(map, flightTimerRef, 1.2, (animate) =>
+        map.flyTo(city.center, EMPTY_CITY_ZOOM, { animate, duration: 1.2 }),
+      );
     } else {
       // Fit every shop and the whole ring (with its label) on screen.
       const bounds = ring.getBounds();
       cityPoints.forEach((p) => bounds.extend([p.lat, p.lng]));
-      map.flyToBounds(bounds, {
-        paddingTopLeft: [50, 80],
-        paddingBottomRight: [50, 50],
-        maxZoom: CITY_MAX_ZOOM,
-        animate,
-        duration: 1.2,
-      });
+      guardedFlight(map, flightTimerRef, 1.2, (animate) =>
+        map.flyToBounds(bounds, {
+          paddingTopLeft: [40, 70],
+          paddingBottomRight: [40, 40],
+          maxZoom: CITY_MAX_ZOOM,
+          animate,
+          duration: 1.2,
+        }),
+      );
     }
   }, [city, cities, points]);
 
@@ -183,23 +239,33 @@ export default function SellingPointsMap({
     const map = mapRef.current;
     if (!map) return;
 
-    markersRef.current.forEach((marker, id) => {
+    markersRef.current.forEach(({ marker, type }, id) => {
       const active = id === selectedId;
-      marker.setIcon(pinIcon(active));
+      marker.setIcon(pinIcon(type, active));
       marker.setZIndexOffset(active ? 1000 : 0);
     });
 
     if (!selectedId) return;
-    const marker = markersRef.current.get(selectedId);
-    if (!marker) return;
+    const entry = markersRef.current.get(selectedId);
+    if (!entry) return;
 
     const zoom = Math.max(map.getZoom(), FOCUS_ZOOM);
     const size = map.getSize();
     // Keep the pin clear of the info card: card sits on the right on desktop, at the bottom on phones.
-    const offset = size.x >= 768 ? L.point(-190, 0) : L.point(0, -Math.round(size.y * 0.22));
-    const target = map.unproject(map.project(marker.getLatLng(), zoom).subtract(offset), zoom);
-    map.stop();
-    map.flyTo(target, zoom, { animate: shouldAnimate(), duration: 0.8 });
+    // On phones the pin tip goes in the middle of the free strip between the filter bar and the card.
+    // Same breakpoint as the card's `md:` side-panel layout (viewport width, not map width).
+    let offset: L.Point;
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      offset = L.point(-190, 0);
+    } else {
+      const free = size.y - MOBILE_TOP_INSET - Math.round(size.y * MOBILE_CARD_SHARE);
+      const tipY = MOBILE_TOP_INSET + PIN_HEIGHT + Math.max(0, (free - PIN_HEIGHT) / 2);
+      offset = L.point(0, Math.round(tipY - size.y / 2));
+    }
+    const target = map.unproject(map.project(entry.marker.getLatLng(), zoom).subtract(offset), zoom);
+    guardedFlight(map, flightTimerRef, 0.8, (animate) =>
+      map.flyTo(target, zoom, { animate, duration: 0.8 }),
+    );
   }, [selectedId, points]);
 
   return (

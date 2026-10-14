@@ -51,7 +51,7 @@
   }
 }
 
-/* Selling point pin */
+/* Selling point pin: lime teardrop with the shop-type icon */
 .sp-pin {
   background: none;
   border: none;
@@ -61,26 +61,29 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 9px;
   transform: translateX(-50%) rotate(-45deg);
-  transform-origin: center;
-  margin-bottom: 8px;
   border-radius: 50% 50% 50% 0;
   background: var(--lime);
   border: 2px solid #05060a;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
-  transition: background-color 200ms ease, transform 200ms ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
+  transition: background-color 200ms ease, transform 200ms ease, border-color 200ms ease;
 }
 
-.sp-pin__dot {
+.sp-pin__icon {
   position: absolute;
   inset: 0;
-  margin: auto;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #05060a;
+  display: grid;
+  place-items: center;
+  transform: rotate(45deg);
+  color: #05060a;
+}
+
+.sp-pin__icon svg {
+  width: 17px;
+  height: 17px;
 }
 
 .sp-pin:hover .sp-pin__head,
@@ -101,12 +104,63 @@
   background: var(--pink);
   border-color: #fff;
   transform: translateX(-50%) rotate(-45deg) scale(1.25);
+  box-shadow: 0 0 0 6px rgba(240, 51, 141, 0.25), 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.sp-pin--active .sp-pin__dot {
-  background: #fff;
+.sp-pin--active .sp-pin__icon {
+  color: #fff;
 }
 
+/* "You are here" dot */
+.sp-user {
+  background: none;
+  border: none;
+}
+
+.sp-user__dot,
+.sp-user__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.sp-user__dot {
+  background: #3b9dff;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.sp-user__pulse {
+  background: rgba(59, 157, 255, 0.35);
+  animation: sp-user-pulse 2s ease-out infinite;
+}
+
+@keyframes sp-user-pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-user__pulse {
+    animation: none;
+  }
+}
+
+/* Horizontal chip rows: swipeable, no visible scrollbar */
+.sp-scroll-x {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sp-scroll-x::-webkit-scrollbar {
+  display: none;
+}
 /* Selected city marker */
 .sp-city-ring {
   stroke: var(--lime);
