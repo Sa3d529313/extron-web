@@ -358,19 +358,8 @@ export default function ProductDetail({
       <div className="bg-white">
         <div className="mx-auto max-w-[1300px] px-6 py-10 md:px-12 md:py-14" dir="rtl">
           <div className="readex space-y-3 text-[14px] leading-[2] text-black/65 md:text-[15px]">
-            {p.key === "extron-green" ? (
-              <>
-                <p>
-                  بطعم لذيذ وروح مستوحاة من الطبيعة، يجمع إكسترون بين الكافيين النباتي الطبيعي والجينسنغ والغوارانا والمتّة. تركيبة ترافق إيقاع يومك، من ساعات الدراسة والعمل إلى لحظات النشاط والتحدّي.
-                </p>
-                <p>
-                  طاقة من مصادر نباتية، وتجربة تتجاوز المذاق التقليدي لمشروبات الطاقة. وتقدّم عائلة إكسترون نكهات متنوعة، منها <strong className="font-semibold text-black/85">الليمون والمانجو والكيوي</strong>، لتجد الطعم الذي يشبهك.
-                </p>
-                <p className="readex text-base font-bold text-black">إكسترون — استمدّ طاقتك من الطبيعة!</p>
-              </>
-            ) : (
-              <p>{p.arDesc}</p>
-            )}
+            {p.descTitle && <p className="text-base font-bold text-black md:text-lg">{p.descTitle}</p>}
+            <p>{p.arDesc}</p>
           </div>
         </div>
       </div>

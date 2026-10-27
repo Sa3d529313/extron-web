@@ -2,7 +2,6 @@
 
 import Image from "@/components/Img";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { gsap } from "gsap";
 
 const mobileSlides = [
   "/brand/12345.jpeg",
@@ -139,26 +138,21 @@ const DESKTOP_SLIDE_DURATION = 9000;
 
 const desktopSlides = [
   {
-    bg: "/brand/hero-bg-new.png",
-    tagline: "/brand/clean-energy-tagline-clean.png",
-    taglineAlt: "Clean Energy For A Brighter Tomorrow",
-    headline: "/brand/hero-arabic-text.png",
-    headlineAlt: "طاقة تصنع الفارق",
+    banner: "/brand/banners/energy-duo.jpg",
+    alt: "مشروبات الطاقة — طاقة من الطبيعة",
     ctaPrimary: { text: "استكشف التشكيلة", bg: "var(--lime)", color: "#000" },
     ctaSecondary: { text: "اعرف أكثر عن إكسترون" },
-    decorative: "/brand/more-than-energy-clean.png",
-    decorativeAlt: "More Than Energy",
   },
   {
-    bg: "/brand/hero-bg-2.png",
-    headline: "/brand/hero-text-2.png",
-    headlineAlt: "انعاشك اليومي",
-    headlineBlend: true,
-    headlineMarginLeft: "-40px",
+    banner: "/brand/banners/soda-trio.jpg",
+    alt: "المشروبات الغازية — انتعاش لكل الأذواق",
     ctaPrimary: { text: "استكشف التشكيلة", bg: "#e63946", color: "#fff" },
     ctaSecondary: { text: "اعرف أكثر عن إكسترون", borderColor: "rgba(230,57,70,0.5)", textColor: "#e63946" },
   },
 ];
+
+// Banner artwork is 1774×887 (2:1). It is shown whole — never cropped.
+const BANNER_RATIO = 1774 / 887;
 
 function DesktopHero() {
   const rootRef = useRef<HTMLElement | null>(null);
@@ -185,107 +179,19 @@ function DesktopHero() {
   }, [advanceSlide]);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-slide-content-0 .hero-el", {
-        y: 20, opacity: 0, duration: 0.9, stagger: 0.08, ease: "power3.out", delay: 0.7,
-      });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
     resetTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [resetTimer]);
 
-  const gradientOverlay = [
-    "linear-gradient(180deg, rgba(5,6,10,0.7) 0%, rgba(5,6,10,0.25) 18%, transparent 35%)",
-    "linear-gradient(90deg, rgba(5,6,10,0.85) 0%, rgba(5,6,10,0.6) 30%, rgba(5,6,10,0.12) 50%, transparent 65%)",
-    "linear-gradient(180deg, transparent 70%, rgba(5,6,10,0.95) 100%)",
-  ].join(", ");
-
   const renderSlide = (slide: typeof desktopSlides[0], idx: number) => (
-    <>
-      {/* Background image */}
-      <Image
-        src={slide.bg}
-        alt=""
-        fill
-        priority={idx === 0}
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-      {/* Gradient overlay */}
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: gradientOverlay }} />
-
-      {/* Content overlay */}
-      <div
-        dir="ltr"
-        className={`hero-slide-content-${idx} absolute inset-0 flex items-center`}
-      >
-        <div className="mx-auto w-full max-w-[1600px] px-10 pb-[12vh] lg:px-16">
-          <div className="max-w-2xl">
-            {slide.tagline && (
-              <div className="hero-el mb-6">
-                <Image
-                  src={slide.tagline}
-                  alt={slide.taglineAlt || ""}
-                  width={2172}
-                  height={724}
-                  priority={idx === 0}
-                  className="w-full max-w-md opacity-80"
-                />
-              </div>
-            )}
-
-            <div className="hero-el" style={{ marginLeft: slide.headlineMarginLeft || "-8px", mixBlendMode: slide.headlineBlend ? "screen" : undefined }}>
-              <Image
-                src={slide.headline}
-                alt={slide.headlineAlt}
-                width={1774}
-                height={887}
-                priority={idx === 0}
-                className="w-full max-w-xl"
-              />
-            </div>
-
-            <div className="hero-el mt-8 flex flex-row items-center gap-3">
-              <a href="/products" dir="rtl"
-                className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full px-7 py-3.5 font-black transition-shadow duration-500"
-                style={{ backgroundColor: slide.ctaPrimary.bg, color: slide.ctaPrimary.color, "--glow": slide.ctaPrimary.bg } as React.CSSProperties}
-              >
-                <span className="relative ar text-base">{slide.ctaPrimary.text}</span>
-                <span dir="ltr" className="relative transition-transform duration-300 group-hover/cta:-translate-x-1">←</span>
-              </a>
-              <a href="/about" dir="rtl"
-                className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition-all duration-500"
-                style={{
-                  borderColor: slide.ctaSecondary?.borderColor || "rgba(255,255,255,0.25)",
-                  color: slide.ctaSecondary?.textColor || "#fff",
-                  "--glow": slide.ctaSecondary?.textColor || "#fff",
-                } as React.CSSProperties}
-              >
-                <span>{slide.ctaSecondary?.text || "اعرف أكثر عن إكسترون"}</span>
-                <span dir="ltr" className="transition-transform duration-300 group-hover/sec:translate-x-1">→</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom-right decorative tagline */}
-      {slide.decorative && (
-        <div className="hero-el pointer-events-none absolute bottom-4 -right-16 lg:-right-20 lg:bottom-6">
-          <Image
-            src={slide.decorative}
-            alt={slide.decorativeAlt || ""}
-            width={2172}
-            height={724}
-            className="w-[420px] lg:w-[520px] opacity-70"
-          />
-        </div>
-      )}
-    </>
+    <Image
+      src={slide.banner}
+      alt={slide.alt}
+      fill
+      priority={idx === 0}
+      sizes="100vw"
+      className="object-contain object-center"
+    />
   );
 
   const dragRef = useRef<{ x: number; t: number } | null>(null);
@@ -306,40 +212,68 @@ function DesktopHero() {
     dragRef.current = null;
   }, [advanceSlide, resetTimer]);
 
+  const slide = desktopSlides[bgIndex];
+
   return (
     <section
       ref={rootRef}
-      className="relative isolate hidden min-h-[100svh] flex-col overflow-hidden bg-[#05060a] pt-24 md:flex"
+      className="relative isolate hidden flex-col items-center overflow-hidden bg-[#05060a] pt-24 md:flex"
       style={{ cursor: "grab", touchAction: "pan-y pinch-zoom" }}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
     >
-      {/* Outgoing slide — everything moves together */}
-      {prevIndex !== null && (
-        <div
-          key={`out-${prevIndex}`}
-          className="absolute inset-0"
-          style={{
-            animation: "heroSlideOut 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-          }}
-        >
-          {renderSlide(desktopSlides[prevIndex], prevIndex)}
-        </div>
-      )}
-
-      {/* Current slide — everything enters together */}
+      {/* Banner stage: full width, but no taller than the screen allows, so the artwork always shows in full */}
       <div
-        key={`in-${bgIndex}`}
-        className="absolute inset-0"
+        className="relative w-full overflow-hidden"
         style={{
-          animation: animating ? "heroSlideIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" : "none",
+          maxWidth: `calc((100svh - 190px) * ${BANNER_RATIO})`,
+          minWidth: "min(100%, 720px)",
+          aspectRatio: String(BANNER_RATIO),
         }}
       >
-        {renderSlide(desktopSlides[bgIndex], bgIndex)}
+        {/* Outgoing slide */}
+        {prevIndex !== null && (
+          <div
+            key={`out-${prevIndex}`}
+            className="absolute inset-0"
+            style={{ animation: "heroSlideOut 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" }}
+          >
+            {renderSlide(desktopSlides[prevIndex], prevIndex)}
+          </div>
+        )}
+
+        {/* Current slide */}
+        <div
+          key={`in-${bgIndex}`}
+          className={`hero-slide-content-${bgIndex} absolute inset-0`}
+          style={{ animation: animating ? "heroSlideIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" : "none" }}
+        >
+          {renderSlide(slide, bgIndex)}
+        </div>
       </div>
 
-      {/* Progress bar — stays fixed, doesn't move with slides */}
-      <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2" dir="ltr">
+      {/* Buttons + progress, below the banner so they never cover it */}
+      <div className="flex w-full flex-col items-center gap-4 py-5" dir="ltr">
+        <div className="flex flex-row items-center gap-3">
+          <a href="/products" dir="rtl"
+            className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full px-7 py-3.5 font-black transition-shadow duration-500"
+            style={{ backgroundColor: slide.ctaPrimary.bg, color: slide.ctaPrimary.color, "--glow": slide.ctaPrimary.bg } as React.CSSProperties}
+          >
+            <span className="relative ar text-base">{slide.ctaPrimary.text}</span>
+            <span dir="ltr" className="relative transition-transform duration-300 group-hover/cta:-translate-x-1">←</span>
+          </a>
+          <a href="/about" dir="rtl"
+            className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition-all duration-500"
+            style={{
+              borderColor: slide.ctaSecondary?.borderColor || "rgba(255,255,255,0.25)",
+              color: slide.ctaSecondary?.textColor || "#fff",
+              "--glow": slide.ctaSecondary?.textColor || "#fff",
+            } as React.CSSProperties}
+          >
+            <span>{slide.ctaSecondary?.text || "اعرف أكثر عن إكسترون"}</span>
+            <span dir="ltr" className="transition-transform duration-300 group-hover/sec:translate-x-1">→</span>
+          </a>
+        </div>
         <div className="h-[3px] w-20 overflow-hidden rounded-full bg-white/20">
           <div
             key={progressKey}
