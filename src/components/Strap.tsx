@@ -1,5 +1,5 @@
 // Two branded straps crossing in an X — the EXTRON "X" itself — laid over the
-// seam between two sections: one lime, one pink (the two energy cans). The
+// seam between two sections: one lime, one grey. The
 // logo, "CLEAN ENERGY DRINK" and the slogan run along each like printed tape,
 // and the two drift slowly in opposite directions.
 
@@ -23,7 +23,7 @@ function Wordmark({ paint }: { paint: Paint }) {
 }
 
 function Run({ paint, accent }: { paint: Paint; accent: string }) {
-  const ink = paint === "black" ? "#05060a" : "#ffffff";
+  const ink = paint === "black" ? "#05060a" : "#ececee";
   return (
     <div className="flex shrink-0 items-center gap-8 pe-8 md:gap-12 md:pe-12">
       {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
@@ -87,7 +87,7 @@ export default function Strap() {
     // Takes no room: a see-through box centred on the seam that clips the
     // bands' ends, so they never show and the page never scrolls sideways.
     <div data-strap className="pointer-events-none relative z-10 -my-[120px] h-[240px] overflow-hidden" aria-hidden="true">
-      <Band down reverse bg="var(--pink)" paint="white" accent="var(--lime)" />
+      <Band down reverse bg="#3a3c42" paint="white" accent="var(--lime)" />
       <Band bg="var(--lime)" paint="black" accent="#05060a" />
     </div>
   );
