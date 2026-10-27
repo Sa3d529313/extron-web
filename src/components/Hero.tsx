@@ -137,41 +137,39 @@ function MobileHero() {
 const DESKTOP_SLIDE_DURATION = 9000;
 
 const desktopSlides = [
-  {
-    banner: "/brand/banners/energy-duo.jpg",
-    alt: "مشروبات الطاقة — طاقة من الطبيعة",
-    ctaPrimary: { text: "استكشف التشكيلة", bg: "var(--lime)", color: "#000" },
-    ctaSecondary: { text: "اعرف أكثر عن إكسترون" },
-  },
-  {
-    banner: "/brand/banners/soda-trio.jpg",
-    alt: "المشروبات الغازية — انتعاش لكل الأذواق",
-    ctaPrimary: { text: "استكشف التشكيلة", bg: "#e63946", color: "#fff" },
-    ctaSecondary: { text: "اعرف أكثر عن إكسترون", borderColor: "rgba(230,57,70,0.5)", textColor: "#e63946" },
-  },
+  { banner: "/brand/banners/energy-duo.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" },
+  { banner: "/brand/banners/soda-trio.jpg", alt: "المشروبات الغازية — انتعاش لكل الأذواق" },
 ];
 
-// Banner artwork is 1774×887 (2:1). It is shown whole — never cropped.
+// Banner artwork is 1774×887 (2:1). It is always shown whole — never cropped.
 const BANNER_RATIO = 1774 / 887;
+// Space reserved under the nav (top) and for the buttons row (bottom).
+const NAV_SPACE = 104;
+const CONTROLS_SPACE = 150;
 
 function DesktopHero() {
-  const rootRef = useRef<HTMLElement | null>(null);
   const [bgIndex, setBgIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [animating, setAnimating] = useState(false);
   const [progressKey, setProgressKey] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const advanceSlide = useCallback((direction: number = 1) => {
+  const goTo = useCallback((target: number) => {
     if (animating) return;
     setBgIndex(prev => {
+      const next = ((target % desktopSlides.length) + desktopSlides.length) % desktopSlides.length;
+      if (next === prev) return prev;
       setPrevIndex(prev);
       setAnimating(true);
       setProgressKey(k => k + 1);
-      return ((prev + direction) % desktopSlides.length + desktopSlides.length) % desktopSlides.length;
+      return next;
     });
     setTimeout(() => { setAnimating(false); setPrevIndex(null); }, 1500);
   }, [animating]);
+
+  const advanceSlide = useCallback((direction: number = 1) => {
+    goTo(bgIndex + direction);
+  }, [goTo, bgIndex]);
 
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -182,17 +180,6 @@ function DesktopHero() {
     resetTimer();
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [resetTimer]);
-
-  const renderSlide = (slide: typeof desktopSlides[0], idx: number) => (
-    <Image
-      src={slide.banner}
-      alt={slide.alt}
-      fill
-      priority={idx === 0}
-      sizes="100vw"
-      className="object-contain object-center"
-    />
-  );
 
   const dragRef = useRef<{ x: number; t: number } | null>(null);
 
@@ -212,77 +199,123 @@ function DesktopHero() {
     dragRef.current = null;
   }, [advanceSlide, resetTimer]);
 
-  const slide = desktopSlides[bgIndex];
+  const renderBanner = (idx: number) => (
+    <Image
+      src={desktopSlides[idx].banner}
+      alt={desktopSlides[idx].alt}
+      fill
+      priority={idx === 0}
+      sizes="(min-width: 768px) 92vw, 100vw"
+      className="object-contain object-center"
+    />
+  );
 
   return (
     <section
-      ref={rootRef}
-      className="relative isolate hidden flex-col items-center overflow-hidden bg-[#05060a] pt-24 md:flex"
-      style={{ cursor: "grab", touchAction: "pan-y pinch-zoom" }}
+      className="relative isolate hidden min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#05060a] md:flex"
+      style={{ cursor: "grab", touchAction: "pan-y pinch-zoom", paddingTop: NAV_SPACE }}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
     >
-      {/* Banner stage: full width, but no taller than the screen allows, so the artwork always shows in full */}
+      {/* Ambient backdrop: the current banner, blurred, filling the whole hero with its colours */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        {desktopSlides.map((s, i) => (
+          <div
+            key={s.banner}
+            className="absolute inset-0 transition-opacity duration-[1400ms] ease-in-out"
+            style={{ opacity: i === bgIndex ? 1 : 0 }}
+          >
+            <Image
+              src={s.banner}
+              alt=""
+              fill
+              sizes="40vw"
+              className="scale-125 object-cover"
+              style={{ filter: "blur(70px) saturate(1.35)" }}
+            />
+          </div>
+        ))}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(5,6,10,0.15) 0%, rgba(5,6,10,0.55) 60%, rgba(5,6,10,0.85) 100%)",
+          }}
+        />
+      </div>
+
+      {/* Banner card — as big as the screen allows, shown whole */}
       <div
-        className="relative w-full overflow-hidden"
+        className="relative overflow-hidden rounded-[22px] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.75)] ring-1 ring-white/15"
         style={{
-          maxWidth: `calc((100svh - 190px) * ${BANNER_RATIO})`,
-          minWidth: "min(100%, 720px)",
+          width: `min(calc(100% - 64px), calc((100svh - ${NAV_SPACE + CONTROLS_SPACE}px) * ${BANNER_RATIO}))`,
           aspectRatio: String(BANNER_RATIO),
         }}
       >
-        {/* Outgoing slide */}
         {prevIndex !== null && (
           <div
             key={`out-${prevIndex}`}
             className="absolute inset-0"
             style={{ animation: "heroSlideOut 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" }}
           >
-            {renderSlide(desktopSlides[prevIndex], prevIndex)}
+            {renderBanner(prevIndex)}
           </div>
         )}
-
-        {/* Current slide */}
         <div
           key={`in-${bgIndex}`}
-          className={`hero-slide-content-${bgIndex} absolute inset-0`}
+          className="absolute inset-0"
           style={{ animation: animating ? "heroSlideIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" : "none" }}
         >
-          {renderSlide(slide, bgIndex)}
+          {renderBanner(bgIndex)}
         </div>
       </div>
 
-      {/* Buttons + progress, below the banner so they never cover it */}
-      <div className="flex w-full flex-col items-center gap-4 py-5" dir="ltr">
-        <div className="flex flex-row items-center gap-3">
-          <a href="/products" dir="rtl"
-            className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full px-7 py-3.5 font-black transition-shadow duration-500"
-            style={{ backgroundColor: slide.ctaPrimary.bg, color: slide.ctaPrimary.color, "--glow": slide.ctaPrimary.bg } as React.CSSProperties}
+      {/* Buttons — same colours on every slide */}
+      <div className="flex flex-col items-center gap-4 pt-6 pb-6">
+        <div className="flex flex-row-reverse items-center gap-3" dir="ltr">
+          <a
+            href="/products"
+            dir="rtl"
+            className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full bg-[var(--lime)] px-8 py-4 font-black text-black shadow-[0_12px_32px_-6px_rgba(166,236,47,0.55),0_4px_14px_rgba(0,0,0,0.45)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5"
+            style={{ "--glow": "var(--lime)" } as React.CSSProperties}
           >
-            <span className="relative ar text-base">{slide.ctaPrimary.text}</span>
-            <span dir="ltr" className="relative transition-transform duration-300 group-hover/cta:-translate-x-1">←</span>
+            <span className="ar text-base">استكشف التشكيلة</span>
+            <span dir="ltr" className="transition-transform duration-300 group-hover/cta:-translate-x-1">←</span>
           </a>
-          <a href="/about" dir="rtl"
-            className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition-all duration-500"
-            style={{
-              borderColor: slide.ctaSecondary?.borderColor || "rgba(255,255,255,0.25)",
-              color: slide.ctaSecondary?.textColor || "#fff",
-              "--glow": slide.ctaSecondary?.textColor || "#fff",
-            } as React.CSSProperties}
+          <a
+            href="/about"
+            dir="rtl"
+            className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/70 px-7 py-4 text-sm font-bold text-white shadow-[0_10px_28px_-6px_rgba(0,0,0,0.7)] backdrop-blur-md transition-[box-shadow,transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-black/85"
+            style={{ "--glow": "#ffffff" } as React.CSSProperties}
           >
-            <span>{slide.ctaSecondary?.text || "اعرف أكثر عن إكسترون"}</span>
+            <span>اعرف أكثر عن إكسترون</span>
             <span dir="ltr" className="transition-transform duration-300 group-hover/sec:translate-x-1">→</span>
           </a>
         </div>
-        <div className="h-[3px] w-20 overflow-hidden rounded-full bg-white/20">
-          <div
-            key={progressKey}
-            className="h-full rounded-full"
-            style={{
-              backgroundColor: "rgba(255,255,255,0.85)",
-              animation: `heroProgress ${DESKTOP_SLIDE_DURATION}ms linear forwards`,
-            }}
-          />
+
+        {/* Slide indicators — click to switch; the active one fills as the slide plays */}
+        <div className="flex items-center gap-2" dir="ltr">
+          {desktopSlides.map((s, i) => (
+            <button
+              key={s.banner}
+              type="button"
+              aria-label={`الشريحة ${i + 1}`}
+              aria-current={i === bgIndex}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={() => { goTo(i); resetTimer(); }}
+              className="group/dot flex h-6 items-center"
+            >
+              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-white/25 transition-colors group-hover/dot:bg-white/40">
+                {i === bgIndex && (
+                  <span
+                    key={progressKey}
+                    className="absolute inset-y-0 left-0 rounded-full bg-white"
+                    style={{ animation: `heroProgress ${DESKTOP_SLIDE_DURATION}ms linear forwards` }}
+                  />
+                )}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
     </section>
