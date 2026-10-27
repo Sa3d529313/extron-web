@@ -12,6 +12,7 @@ export type Product = {
   arTag: string;
   desc: string;
   arDesc: string;
+  descTitle?: string;
   accent: string;
   cardBg: string;
   bullets: { en: string; ar: string }[];
@@ -32,7 +33,8 @@ export const productData: Product[] = [
     tag: "New Generation Soda",
     arTag: "صودا الجيل الجديد",
     desc: "Clean lemon-lime, enough fizz.",
-    arDesc: "بدون مواد حافظة. بدون ألوان اصطناعية. فقط نكهة ليمون نظيفة وفقاعات كافية لتنعشك.",
+    arDesc: "مشروب غازي بنكهة الفواكه المختلطة، بمذاق فاكهي وفقاعات منعشة. تحتوي العبوة على 105 سعرات حرارية، ويُقدَّم باردًا مع الوجبات أو بمفرده.",
+    descTitle: "فيزو | Fizo Gazoz — 250 مل",
     accent: "#c8ff5a",
     cardBg: "#1a2a0f",
     bullets: [
@@ -46,10 +48,11 @@ export const productData: Product[] = [
       { label: "Origin", arLabel: "المنشأ", value: "Palestine" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
-      { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/packs/fizo-6.jpg", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 48, img: "/brand/packs/fizo-24.jpg" },
     ],
     gallery: ["/lifestyle/pic7.jpg", "/lifestyle/pic1.jpg"],
+    ingredientImage: "/brand/info/fizo.jpg",
     ingredients: [
       { ar: "نكهة ليمون طبيعية", en: "Natural Lemon Flavor", amount: "—" },
       { ar: "بدون مواد حافظة", en: "No Preservatives", amount: "0" },
@@ -65,7 +68,8 @@ export const productData: Product[] = [
     tag: "Berry × Vitamins",
     arTag: "بنكهة الفراولة والتوت",
     desc: "Energy designed for her.",
-    arDesc: "طاقة صُممت خصيصاً لكِ. مضادات أكسدة، فيتامين B6 وB12، زنك وفيتامين D. بنكهة الفراولة والتوت — بدون تنازلات.",
+    arDesc: "مشروب طاقة غازي بنكهة الفراولة والكيوي، يجمع الكافيين الطبيعي مع الغوارانا والمتّة ومستخلص الجنسنغ وإل-كارنيتين. مُحلّى بالسكر ونبتة الستيفيا، وتحتوي العبوة على 37.5 ملغ من الكافيين، و17.5 غ من السكر، و70 سعرة حرارية. خالٍ من المواد الحافظة، ويُقدَّم باردًا.",
+    descTitle: "إكسترون الزهري | EXTRON For Women — 250 مل",
     accent: "#f0338d",
     cardBg: "#3a0820",
     bullets: [
@@ -79,11 +83,11 @@ export const productData: Product[] = [
       { label: "Volume", arLabel: "الحجم", value: "250ml" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
-      { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/packs/extron-pink-6.jpg", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 62, img: "/brand/packs/extron-pink-24.jpg" },
     ],
     gallery: ["/brand/women-fruit.png", "/brand/women-beach.png"],
-    ingredientImage: "/122333.png",
+    ingredientImage: "/brand/info/extron-pink.jpg",
     ingredients: [
       { ar: "كافيين نباتي", en: "Plant Caffeine", amount: "80mg" },
       { ar: "فيتامين B6 + B12", en: "Vitamin B6 + B12", amount: "مركّب" },
@@ -101,7 +105,8 @@ export const productData: Product[] = [
     tag: "Clean Energy · Signature",
     arTag: "الأصلي · بداية الحكاية",
     desc: "Real energy from real sources.",
-    arDesc: "طاقة حقيقية من مصادر حقيقية. كافيين نباتي، توراين، فيتامينات ب، جينسنغ وغوارانا — صُنعت للأداء، لا للانهيار السريع.",
+    arDesc: "مشروب طاقة غازي بكافيين طبيعي من مصادر نباتية، مع الغوارانا والمتّة ومستخلص الجنسنغ وإل-كارنيتين. تحتوي العبوة على 37.5 ملغ من الكافيين، و27 غ من السكر، ونحو 108 سعرات حرارية. خالٍ من المواد الحافظة، ويُقدَّم باردًا.",
+    descTitle: "إكسترون الأخضر | EXTRON Original — 250 مل",
     accent: "#a6ec2f",
     cardBg: "#1b3a08",
     bullets: [
@@ -119,7 +124,7 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 62, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/brand/green-fruit.png", "/lifestyle/pic3.jpg", "/lifestyle/pic5.jpg"],
-    ingredientImage: "/brand/112233.png",
+    ingredientImage: "/brand/info/extron-green.jpg",
     ingredients: [
       { ar: "كافيين نباتي", en: "Plant Caffeine", amount: "108mg" },
       { ar: "توراين", en: "Taurine", amount: "1000mg" },
@@ -138,7 +143,8 @@ export const productData: Product[] = [
     tag: "Sparkling Orange Soda",
     arTag: "صودا برتقال منعشة",
     desc: "Crisp, refreshing, honest.",
-    arDesc: "منعش، حلو، صريح. صودا برتقال بنكهة فاكهة حقيقية — لكل لحظة استراحة قصيرة.",
+    arDesc: "مشروب غازي بنكهة البرتقال مع فيتامين C، يجمع المذاق الفاكهي والفقاعات المنعشة. ويُقدَّم باردًا للاستمتاع بأفضل مذاق.",
+    descTitle: "فور أس برتقال | FOR US Orange — 250 مل",
     accent: "#ff7a1a",
     cardBg: "#3a1f08",
     bullets: [
@@ -152,10 +158,11 @@ export const productData: Product[] = [
       { label: "Best", arLabel: "الأفضل", value: "Cold" },
     ],
     packs: [
-      { size: 6, label: "6 عبوات", price: 0, img: "/brand/6pack.png", comingSoon: true },
-      { size: 24, label: "24 عبوة", price: 48, img: "/brand/24pack.jpg" },
+      { size: 6, label: "6 عبوات", price: 0, img: "/brand/packs/for-us-6.jpg", comingSoon: true },
+      { size: 24, label: "24 عبوة", price: 48, img: "/brand/packs/for-us-24.jpg" },
     ],
     gallery: ["/lifestyle/pic9.jpg", "/lifestyle/pic1.jpg"],
+    ingredientImage: "/brand/info/for-us.jpg",
     ingredients: [
       { ar: "نكهة برتقال طبيعية", en: "Natural Orange Flavor", amount: "—" },
       { ar: "بدون مواد حافظة", en: "No Preservatives", amount: "0" },
@@ -171,7 +178,8 @@ export const productData: Product[] = [
     tag: "New Generation Cola",
     arTag: "الجيل الجديد من الكولا",
     desc: "Cola like you haven't had before.",
-    arDesc: "كولا كما لم تشربها من قبل. طعم عميق، فقاعات قوية، طاقة مختلفة — الكولا اللي كنت تستناها.",
+    arDesc: "مشروب غازي بنكهة الكولا، يُقدَّم باردًا لمذاق منعش. تحتوي العبوة على 37.5 ملغ من الكافيين، و27.5 غ من السكر، ونحو 108 سعرات حرارية.",
+    descTitle: "كولا نوفا | Cola Nova — 250 مل",
     accent: "#e5222b",
     cardBg: "#3a0808",
     bullets: [
@@ -189,6 +197,7 @@ export const productData: Product[] = [
       { size: 24, label: "24 عبوة", price: 35, img: "/brand/24pack.jpg" },
     ],
     gallery: ["/lifestyle/pic8.jpg", "/lifestyle/pic1.jpg"],
+    ingredientImage: "/brand/info/cola-nova.jpg",
     ingredients: [
       { ar: "نكهة كولا طبيعية", en: "Natural Cola Flavor", amount: "—" },
       { ar: "فقاعات طبيعية", en: "Natural Carbonation", amount: "—" },
