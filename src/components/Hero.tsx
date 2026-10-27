@@ -119,7 +119,7 @@ function MobileHero() {
         </div>
       </div>
 
-      <div dir="ltr" className="flex justify-center gap-2 bg-[#eae7e1] py-4">
+      <div dir="ltr" className="flex justify-center gap-2 bg-[#eae7e1] pt-4 pb-[72px] md:pb-4">
         {mobileSlides.map((_, i) => (
           <button
             key={i}
@@ -141,11 +141,11 @@ const desktopSlides = [
   { banner: "/brand/banners/soda-trio.jpg", alt: "المشروبات الغازية — انتعاش لكل الأذواق" },
 ];
 
-// Banner artwork is 1774×887 (2:1). It is always shown whole — never cropped.
+// Banner artwork is 1774×887 (2:1). It runs edge to edge across the screen
+// and is shown whole — never cropped.
 const BANNER_RATIO = 1774 / 887;
-// Space reserved under the nav (top) and for the buttons row (bottom).
-const NAV_SPACE = 104;
-const CONTROLS_SPACE = 150;
+// Room for the floating nav above the banner, so the nav never covers its headline.
+const NAV_SPACE = 96;
 
 function DesktopHero() {
   const [bgIndex, setBgIndex] = useState(0);
@@ -205,53 +205,20 @@ function DesktopHero() {
       alt={desktopSlides[idx].alt}
       fill
       priority={idx === 0}
-      sizes="(min-width: 768px) 92vw, 100vw"
+      sizes="100vw"
       className="object-contain object-center"
     />
   );
 
   return (
     <section
-      className="relative isolate hidden min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#05060a] md:flex"
+      className="relative isolate hidden flex-col bg-[#05060a] md:flex"
       style={{ cursor: "grab", touchAction: "pan-y pinch-zoom", paddingTop: NAV_SPACE }}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
     >
-      {/* Ambient backdrop: the current banner, blurred, filling the whole hero with its colours */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        {desktopSlides.map((s, i) => (
-          <div
-            key={s.banner}
-            className="absolute inset-0 transition-opacity duration-[1400ms] ease-in-out"
-            style={{ opacity: i === bgIndex ? 1 : 0 }}
-          >
-            <Image
-              src={s.banner}
-              alt=""
-              fill
-              sizes="40vw"
-              className="scale-125 object-cover"
-              style={{ filter: "blur(70px) saturate(1.35)" }}
-            />
-          </div>
-        ))}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(5,6,10,0.15) 0%, rgba(5,6,10,0.55) 60%, rgba(5,6,10,0.85) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Banner card — as big as the screen allows, shown whole */}
-      <div
-        className="relative overflow-hidden rounded-[22px] shadow-[0_30px_90px_-20px_rgba(0,0,0,0.75)] ring-1 ring-white/15"
-        style={{
-          width: `min(calc(100% - 64px), calc((100svh - ${NAV_SPACE + CONTROLS_SPACE}px) * ${BANNER_RATIO}))`,
-          aspectRatio: String(BANNER_RATIO),
-        }}
-      >
+      {/* Banner — full screen width, whole picture */}
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: String(BANNER_RATIO) }}>
         {prevIndex !== null && (
           <div
             key={`out-${prevIndex}`}
@@ -270,13 +237,13 @@ function DesktopHero() {
         </div>
       </div>
 
-      {/* Buttons — same colours on every slide */}
-      <div className="flex flex-col items-center gap-4 pt-6 pb-6">
+      {/* Buttons — same colours on every slide; room below for the straps that cross the seam */}
+      <div className="flex flex-col items-center gap-4 pt-7 pb-[92px]">
         <div className="flex flex-row-reverse items-center gap-3" dir="ltr">
           <a
             href="/products"
             dir="rtl"
-            className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full bg-[var(--lime)] px-8 py-4 font-black text-black shadow-[0_12px_32px_-6px_rgba(166,236,47,0.55),0_4px_14px_rgba(0,0,0,0.45)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5"
+            className="hero-cta-primary group/cta inline-flex items-center justify-center gap-3 rounded-full bg-[var(--lime)] px-8 py-4 font-black text-black shadow-[0_12px_32px_-6px_rgba(166,236,47,0.5)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5"
             style={{ "--glow": "var(--lime)" } as React.CSSProperties}
           >
             <span className="ar text-base">استكشف التشكيلة</span>
@@ -285,7 +252,7 @@ function DesktopHero() {
           <a
             href="/about"
             dir="rtl"
-            className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/70 px-7 py-4 text-sm font-bold text-white shadow-[0_10px_28px_-6px_rgba(0,0,0,0.7)] backdrop-blur-md transition-[box-shadow,transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-black/85"
+            className="hero-cta-secondary group/sec ar inline-flex items-center gap-2 rounded-full border border-white/30 bg-black px-7 py-4 text-sm font-bold text-white shadow-[0_10px_28px_-6px_rgba(0,0,0,0.7)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5"
             style={{ "--glow": "#ffffff" } as React.CSSProperties}
           >
             <span>اعرف أكثر عن إكسترون</span>
@@ -305,7 +272,7 @@ function DesktopHero() {
               onClick={() => { goTo(i); resetTimer(); }}
               className="group/dot flex h-6 items-center"
             >
-              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-white/25 transition-colors group-hover/dot:bg-white/40">
+              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-white/20 transition-colors group-hover/dot:bg-white/35">
                 {i === bgIndex && (
                   <span
                     key={progressKey}
