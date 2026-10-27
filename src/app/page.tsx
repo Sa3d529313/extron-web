@@ -1,6 +1,7 @@
 import Intro from "@/components/Intro";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import Strap from "@/components/Strap";
 import Footer from "@/components/Footer";
 
 const values = [
@@ -16,6 +17,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        {/* lime and pink straps crossing in an X over the seam below the hero */}
+        <Strap />
 
         {/* What We Stand For */}
         <section className="relative overflow-hidden bg-[var(--bg)] py-16 md:py-32">

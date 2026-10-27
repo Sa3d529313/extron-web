@@ -593,3 +593,22 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 }
 
 
+
+/* Branded straps crossing between sections (see Strap.tsx): they drift slowly sideways */
+@keyframes strap-run { to { transform: translate3d(-50%, 0, 0); } }
+.strap-run { animation: strap-run 60s linear infinite; will-change: transform; }
+.strap-run-back { animation-direction: reverse; }
+/* how far apart the two straps end up at the far edge of the screen */
+[data-strap] { --strap-far: 34px; }
+@media (min-width: 768px) { [data-strap] { --strap-far: 46px; } }
+/* fixed angles for browsers without CSS trig (older phones), then the exact one */
+.strap-up { rotate: -7.5deg; }
+.strap-down { rotate: 7.5deg; }
+@media (min-width: 768px) { .strap-up { rotate: -2.7deg; } .strap-down { rotate: 2.7deg; } }
+@supports (rotate: atan2(1px, 1px)) {
+  .strap-up { rotate: atan2(calc(-1 * var(--strap-far)), 68vw); }
+  .strap-down { rotate: atan2(var(--strap-far), 68vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .strap-run { animation: none; }
+}
