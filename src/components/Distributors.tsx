@@ -6,29 +6,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const perks = [
-  {
-    ar: "هوامش تنافسية",
-    en: "Competitive margins",
-    desc: "أسعار الجملة مصممة لتترك ربحاً حقيقياً لك.",
-  },
-  {
-    ar: "توصيل منتظم",
-    en: "Reliable delivery",
-    desc: "جدول توزيع أسبوعي يغطي فلسطين — بلا تأخير.",
-  },
-  {
-    ar: "دعم تسويقي",
-    en: "Marketing support",
-    desc: "مواد عرض، لافتات، وعينات مجانية لمحلك أو مطعمك.",
-  },
-  {
-    ar: "استرجاع مضمون",
-    en: "Return guarantee",
-    desc: "لا تقلق من المخزون — نسترجع ما لم يُبَع خلال شروط الاتفاق.",
-  },
-];
-
 const WHATSAPP_NUMBER = "970569995095";
 
 function buildWhatsAppUrl(
@@ -72,14 +49,7 @@ export default function Distributors() {
       });
     }, ref);
 
-    const cards = ref.current?.querySelectorAll(".perk-card");
-    if (!cards?.length) return () => ctx.revert();
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("revealed"); io.unobserve(e.target); } }),
-      { threshold: 0.15 },
-    );
-    cards.forEach((c) => io.observe(c));
-    return () => { ctx.revert(); io.disconnect(); };
+    return () => ctx.revert();
   }, []);
 
   const canSubmit = shopName.trim() && phone.trim() && city;
@@ -138,23 +108,6 @@ export default function Distributors() {
               <p className="dist-fade mt-2 text-sm text-black/50">
                 {"Supermarkets · shops · cafés · restaurants"}
               </p>
-
-              <ul className="dist-fade mt-6 grid grid-cols-2 gap-3 md:mt-8 md:gap-4">
-                {perks.map((p) => (
-                  <li
-                    key={p.en}
-                    className="perk-card rounded-lg bg-white/20 p-4 backdrop-blur-sm md:p-5"
-                  >
-                    <p className="ar text-base font-bold text-black">{p.ar}</p>
-                    <p className="mt-0.5 text-xs text-black/50">
-                      {p.en}
-                    </p>
-                    <p className="ar mt-3 text-sm leading-relaxed text-black/70">
-                      {p.desc}
-                    </p>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             {/* Right — WhatsApp form */}
