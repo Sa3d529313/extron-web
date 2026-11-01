@@ -16,7 +16,7 @@ export default function GalleryPage() {
             <span dir="ltr">→</span>
             <span>العودة للرئيسية</span>
           </a>
-          <p className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
+          <p className="mb-3 flex items-center gap-3 text-sm text-[var(--lime)]">
             <span className="h-px w-8 bg-[var(--lime)]" />
             المعرض · Gallery
           </p>

@@ -69,7 +69,7 @@ export default function IngredientsPage() {
             <span dir="ltr">→</span>
             <span>العودة للرئيسية</span>
           </a>
-          <p className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
+          <p className="mb-3 flex items-center gap-3 text-sm text-[var(--lime)]">
             <span className="h-px w-8 bg-[var(--lime)]" />
             المكونات · Ingredients
           </p>
@@ -91,7 +91,7 @@ export default function IngredientsPage() {
                 <div className="mb-4 flex items-start justify-between">
                   <div>
                     <p className="readex text-xl text-white">{ing.ar}</p>
-                    <p className="mt-0.5 text-[10px] uppercase tracking-[0.25em] text-white/40">
+                    <p className="mt-0.5 text-xs text-white/40">
                       {ing.en}
                     </p>
                   </div>
@@ -120,7 +120,7 @@ export default function IngredientsPage() {
                   <p className="ar text-sm font-bold text-[var(--lime)]">
                     {p.ar}
                   </p>
-                  <p className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                  <p className="mt-1 text-xs text-white/30">
                     {p.en}
                   </p>
                 </div>

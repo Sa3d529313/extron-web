@@ -120,7 +120,7 @@ export default function Distributors() {
           <div className="relative grid gap-8 md:grid-cols-[1.1fr_1fr] md:gap-20">
             {/* Left — pitch */}
             <div>
-              <p className="dist-fade mb-4 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-black/70">
+              <p className="dist-fade mb-4 flex items-center gap-3 text-sm text-black/70">
                 <span className="h-px w-8 bg-black/70"></span>
                 {"للتجار والموزعين · For Trade"}
               </p>
@@ -135,7 +135,7 @@ export default function Distributors() {
                   {"إذا عندك سوبرماركت، محل، كافيه أو مطعم — EXTRON علامة جاهزة تعطيك منتج قوي، حضور بصري لافت، وطلب حقيقي من الزبائن."}
                 </ScrollReveal>
               </div>
-              <p className="dist-fade mt-2 text-sm uppercase tracking-[0.2em] text-black/50">
+              <p className="dist-fade mt-2 text-sm text-black/50">
                 {"Supermarkets · shops · cafés · restaurants"}
               </p>
 
@@ -146,7 +146,7 @@ export default function Distributors() {
                     className="perk-card rounded-lg bg-white/20 p-4 backdrop-blur-sm md:p-5"
                   >
                     <p className="ar text-base font-bold text-black">{p.ar}</p>
-                    <p className="mt-0.5 text-[10px] uppercase tracking-[0.25em] text-black/50">
+                    <p className="mt-0.5 text-xs text-black/50">
                       {p.en}
                     </p>
                     <p className="ar mt-3 text-sm leading-relaxed text-black/70">
@@ -160,7 +160,7 @@ export default function Distributors() {
             {/* Right — WhatsApp form */}
             <div className="dist-fade">
               <div className="rounded-xl bg-black p-8 md:p-10">
-                <p className="mb-2 text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
+                <p className="mb-2 text-sm text-[var(--lime)]">
                   {"تواصل معنا · Get in Touch"}
                 </p>
                 <p className="readex mb-8 text-2xl text-white md:text-3xl">

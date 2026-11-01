@@ -37,6 +37,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
   }, [hovered, forceLight, clearRevert]);
 
   const isLight = !forceDark && (forceLight || (hovered && !open));
+  const glass = !forceDark && !open && !isLight;
 
   return (
     <header
@@ -50,7 +51,9 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
     >
       {/* Main bar */}
       <div
+        className="nav-glass"
         style={{
+          "--rim": glass ? 1 : 0,
           borderRadius: open ? "14px 14px 0 0" : "14px",
           backgroundColor: forceDark
             ? "rgba(5, 6, 10, 1)"
@@ -60,16 +63,21 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
                 : "rgba(5, 6, 10, 0.95)"
               : isLight
                 ? "rgba(255, 255, 255, 0.95)"
-                : "rgba(20, 20, 20, 0.45)",
-          backdropFilter: "blur(14px) saturate(180%)",
-          WebkitBackdropFilter: "blur(14px) saturate(180%)",
+                : "rgba(12, 13, 16, 0.3)",
+          // liquid glass: a faint white sheen (11% → 2.5%) over a light tint of the picture behind
+          backgroundImage: glass
+            ? "linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.025))"
+            : "none",
+          boxShadow: glass ? "inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px -8px rgba(0,0,0,0.35)" : "none",
+          backdropFilter: "blur(22px) saturate(170%)",
+          WebkitBackdropFilter: "blur(22px) saturate(170%)",
           borderTop: isLight ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.08)",
           borderLeft: isLight ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.08)",
           borderRight: isLight ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.08)",
           borderBottom: open ? "none" : (isLight ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.08)"),
           transition:
             "background-color 400ms cubic-bezier(0.4, 0, 0.2, 1), border-color 400ms ease",
-        }}
+        } as React.CSSProperties}
         onMouseEnter={() => { clearRevert(); setHovered(true); }}
         onMouseLeave={() => { clearRevert(); setHovered(false); }}
       >
@@ -109,7 +117,7 @@ export default function Nav({ forceLight = false, forceDark = false }: { forceLi
             className="flex items-center justify-center"
             style={{ gridColumn: 2 }}
           >
-            <div className="flex items-center" style={{ height: "56px" }}>
+            <div id="nav-logo" className="flex items-center" style={{ height: "56px" }}>
               <Image
                 src="/brand/logo-e.png"
                 alt=""

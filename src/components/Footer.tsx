@@ -89,7 +89,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-white/40">
+            <p className="mb-4 text-sm text-white/40">
               Explore
             </p>
             <ul className="space-y-3">
@@ -112,7 +112,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-white/40">
+            <p className="mb-4 text-sm text-white/40">
               For Trade
             </p>
             <ul className="space-y-3">
@@ -136,7 +136,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.25em] text-white/40">
+            <p className="mb-4 text-sm text-white/40">
               Follow
             </p>
             <ul className="space-y-3">

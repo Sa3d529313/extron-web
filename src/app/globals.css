@@ -453,21 +453,6 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 ::-webkit-scrollbar-thumb { background: #1a1d26; border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--lime); }
 
-/* Intro loader */
-.intro-mask {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: #05060a;
-  display: grid;
-  place-items: center;
-  animation: intro-force-dismiss 4s ease-in forwards;
-}
-@keyframes intro-force-dismiss {
-  0%, 75% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; pointer-events: none; }
-}
-
 /* Hide until fonts loaded */
 .no-flash { visibility: hidden; }
 .no-flash.loaded { visibility: visible; }
@@ -563,34 +548,6 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 
 
 
-/* Slow breathing glow: animate opacity instead of recalculating blur every frame. */
-.intro-mask { opacity: 1; transition: opacity 1100ms cubic-bezier(.4,0,.2,1); }
-.intro-mask[data-leaving="true"] { opacity: 0; pointer-events: none; }
-.intro-logo {
-  position: relative;
-  transition: opacity 900ms ease, transform 900ms cubic-bezier(.4,0,.2,1);
-}
-.intro-mask[data-leaving="true"] .intro-logo {
-  opacity: 0;
-  transform: scale(0.92);
-}
-.intro-logo-base { display: block; opacity: .3; }
-.intro-logo-glow {
-  position: absolute;
-  inset: 0;
-  filter: drop-shadow(0 0 16px rgba(166,236,47,.85)) drop-shadow(0 0 38px rgba(166,236,47,.55));
-  animation: intro-breathe 2.4s ease-in-out infinite;
-  will-change: opacity;
-}
-@keyframes intro-breathe {
-  0%, 100% { opacity: .04; }
-  50% { opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-  /* Brightness-only breathing remains visible without spatial motion. */
-  .intro-logo-glow { animation: intro-breathe 2.4s ease-in-out infinite; }
-  .intro-mask { transition-duration: 200ms; }
-}
 
 
 
@@ -611,4 +568,269 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   .strap-run { animation: none; }
+}
+
+/* ================= Motion & type system ================= */
+:root {
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --text-body: rgba(255, 255, 255, 0.66);
+}
+/* keep the scrollbar's room even while the intro locks scrolling — no sideways jump */
+html { scrollbar-gutter: stable; }
+
+/* Latin accent words in headlines */
+.serif-i {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Headline lines revealed from a mask (see Reveal.tsx) */
+.line-mask { display: block; overflow: hidden; padding-block: 0.12em; margin-block: -0.12em; }
+.line-mask > span { display: block; transform: translateY(110%); transition: transform 1.4s var(--ease); }
+.is-in .line-mask > span { transform: none; }
+.is-in .line-mask:nth-child(2) > span { transition-delay: 0.09s; }
+.is-in .line-mask:nth-child(3) > span { transition-delay: 0.18s; }
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
+.is-in .fade-up, .fade-up.is-in { opacity: 1; transform: none; }
+.is-in .fade-up.d1 { transition-delay: 0.12s; }
+.is-in .fade-up.d2 { transition-delay: 0.24s; }
+.is-in .fade-up.d3 { transition-delay: 0.36s; }
+
+/* ---------- Intro → header hand-off (Intro.tsx) ---------- */
+.intro-root { display: none; }
+html[data-intro="play"] .intro-root { display: block; }
+.intro-curtain {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  /* 180px taller than the screen, its bottom feathered, so the lift has a soft edge */
+  height: calc(100vh + 180px);
+  background: linear-gradient(to bottom, #05060a calc(100% - 180px), rgba(5, 6, 10, 0));
+  will-change: transform;
+  animation: intro-fallback 0.6s 7s forwards;
+}
+.intro-count {
+  position: absolute;
+  bottom: calc(180px + 28px);
+  left: 32px;
+  direction: ltr;
+  font-family: var(--font-readex), system-ui, sans-serif;
+  font-weight: 200;
+  font-size: clamp(44px, 7vw, 104px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+.intro-mark {
+  position: fixed;
+  z-index: 101;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  display: flex;
+  direction: ltr;
+  height: 64px;
+  will-change: transform;
+  animation: intro-fallback 0.6s 7s forwards;
+}
+@media (min-width: 768px) { .intro-mark { height: 96px; } }
+.intro-mark img { display: block; height: 100%; width: auto; }
+.intro-piece { opacity: 0; transform: translateY(30%) scale(0.7); }
+@keyframes intro-fallback { to { opacity: 0; visibility: hidden; } }
+html[data-intro="play"]:not(.intro-done) #nav-logo { opacity: 0; }
+
+/* Hero entrance — starts while the curtain is still lifting */
+.hero-rise { animation: hero-rise 1.4s var(--ease) 0.25s both; }
+.hero-rise-2 { animation-delay: 0.4s; }
+html[data-intro="play"] .hero-rise { animation-delay: 2.75s; }
+html[data-intro="play"] .hero-rise-2 { animation-delay: 2.9s; }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+/* every inner page's main title arrives the same way */
+main h1 { animation: hero-rise 1.4s var(--ease) 0.1s both; }
+.hero-zoom { animation: hero-zoom 2.6s var(--ease) 0.05s both; }
+html[data-intro="play"] .hero-zoom { animation-delay: 2.4s; }
+@keyframes hero-zoom { from { transform: scale(1.07); } to { transform: none; } }
+
+/* ---------- Liquid-glass header ---------- */
+.nav-glass { position: relative; isolation: isolate; }
+/* specular rim: a gradient border masked down to 1px */
+.nav-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(255,255,255,.55), rgba(255,255,255,.08) 28%, rgba(255,255,255,0) 52%, rgba(255,255,255,.12) 78%, rgba(255,255,255,.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+  opacity: var(--rim, 1);
+  transition: opacity 0.4s ease;
+}
+/* soft light pooled along the top edge */
+.nav-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(120% 140% at 50% -40%, rgba(255,255,255,.14), transparent 55%);
+  pointer-events: none;
+  opacity: var(--rim, 1);
+  transition: opacity 0.4s ease;
+}
+
+/* ---------- Cursor (Cursor.tsx, mouse devices only) ---------- */
+html.has-cursor, html.has-cursor * { cursor: none !important; }
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+html.cursor-visible .cursor-dot, html.cursor-visible .cursor-ring { opacity: 1; }
+.cursor-dot > span, .cursor-ring > span { position: absolute; border-radius: 50%; transition: transform 0.5s var(--ease); }
+.cursor-dot > span { width: 6px; height: 6px; left: -3px; top: -3px; background: #fff; }
+.cursor-ring > span { width: 36px; height: 36px; left: -18px; top: -18px; border: 1px solid rgba(255,255,255,.7); }
+html.cursor-link .cursor-ring > span { transform: scale(1.75); }
+html.cursor-link .cursor-dot > span { transform: scale(0.35); }
+
+/* ---------- Corner scroll badge (ScrollBadge.tsx) ---------- */
+.scroll-badge {
+  position: fixed;
+  left: 22px;
+  bottom: 22px;
+  z-index: 60;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: none;
+  background: radial-gradient(circle, rgba(10,11,14,.55), rgba(10,11,14,.35));
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 10px 30px rgba(0,0,0,.25);
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.scroll-badge.is-shown { opacity: 1; transform: none; pointer-events: auto; }
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) { .scroll-badge { display: block; } }
+.scroll-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.scroll-badge text {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 9.4px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  fill: #fff;
+}
+.scroll-badge-mark { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+.scroll-badge-mark img { width: 100%; height: 100%; object-fit: contain; transition: filter 0.6s var(--ease); }
+.scroll-badge[data-tone="light"] .scroll-badge-mark img { filter: brightness(0) invert(1); }
+
+/* ---------- Home: range rows ---------- */
+.range-row { position: relative; isolation: isolate; }
+.range-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(460px circle at var(--mx, 50%) 50%, rgba(166,236,47,.13), transparent 70%),
+    linear-gradient(to left, rgba(255,255,255,.04), rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transition: opacity 0.7s var(--ease);
+}
+.range-row:hover::before, .range-row:focus-visible::before { opacity: 1; }
+.range-row .range-name { transition: transform 0.9s var(--ease); }
+.range-row:hover .range-name { transform: translateX(-14px); }
+.range-row .range-arrow { transition: transform 0.9s var(--ease), opacity 0.5s ease; opacity: 0.35; }
+.range-row:hover .range-arrow { transform: translateX(-8px); opacity: 1; }
+.range-float {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  width: 220px;
+  aspect-ratio: 2 / 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+.range-float.is-on { opacity: 1; }
+.range-float img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 62% 58% at 50% 50%, #000 50%, transparent 100%);
+}
+.range-float img.is-active { opacity: 1; }
+
+/* ---------- Glass panels (HomeFind.tsx) ---------- */
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255,255,255,.11), rgba(255,255,255,.025));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 30px 60px -30px rgba(0,0,0,.6);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+}
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,.4), rgba(255,255,255,.06) 30%, rgba(255,255,255,0) 55%, rgba(255,255,255,.1) 80%, rgba(255,255,255,.26));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* a soft lime light that follows the pointer (--mx / --my) */
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(560px circle at var(--mx, 85%) var(--my, 0%), rgba(166,236,47,.16), rgba(166,236,47,.04) 40%, transparent 70%);
+  opacity: 0.55;
+  transition: opacity 0.8s var(--ease);
+  pointer-events: none;
+}
+.glass-panel:hover::after { opacity: 1; }
+
+/* ---------- Home: pinned story ---------- */
+.story-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(0.45em);
+  will-change: transform, opacity, filter;
+}
+.story-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(42% 46% at 50% 56%, rgba(166,236,47,.2), rgba(166,236,47,.05) 45%, transparent 72%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .hero-zoom, main h1 { animation: none; }
+  .line-mask > span, .fade-up { transform: none; opacity: 1; transition: none; }
 }

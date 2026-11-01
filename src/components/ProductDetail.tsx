@@ -151,7 +151,7 @@ export default function ProductDetail({
           >
             {/* Tag line */}
             <p
-              className="space mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-black/75"
+              className="space mb-4 flex items-center gap-3 text-xs font-semibold text-black/75"
               dir="ltr"
             >
               <span aria-hidden="true" className="h-px w-5 shrink-0 bg-black/75" />
@@ -197,7 +197,7 @@ export default function ProductDetail({
                   key={s.label}
                   className="text-left"
                 >
-                  <p className="space text-[10px] font-medium uppercase tracking-wider text-black/50">
+                  <p className="space text-xs font-medium text-black/50">
                     {s.label}
                   </p>
                   <p className="space mt-1 text-lg font-semibold text-black">
@@ -212,7 +212,7 @@ export default function ProductDetail({
 
             <div className="mb-4 flex items-center justify-between">
               <p className="readex text-sm font-semibold text-black">اختر العبوة</p>
-              <p className="space text-[10px] uppercase tracking-[0.15em] text-black/40">SELECT PACK</p>
+              <p className="space text-xs text-black/40">Select pack</p>
             </div>
             <div className="relative grid grid-cols-2 gap-1 rounded-2xl bg-neutral-100/80 p-1.5">
               {/* Sliding selection indicator */}
@@ -312,7 +312,7 @@ export default function ProductDetail({
           <div className="mx-auto max-w-[1600px] px-6 pt-0 pb-2 md:px-10 md:pt-0 md:pb-3">
             <div className="mb-2 flex items-center justify-between">
               <p className="readex text-lg font-semibold text-black/80" dir="rtl">المكونات</p>
-              <p className="space text-[11px] font-medium uppercase tracking-[0.15em] text-black/30" dir="ltr">WHAT&apos;S INSIDE</p>
+              <p className="space text-xs font-medium text-black/30" dir="ltr">What&apos;s inside</p>
             </div>
             <Image
               src={p.ingredientImage}
@@ -329,7 +329,7 @@ export default function ProductDetail({
           <div className="mx-auto max-w-[1300px] px-6 py-12 md:px-12 md:py-16">
             <div className="mb-6 flex items-center justify-between">
               <p className="readex text-lg font-semibold text-black/80" dir="rtl">المكونات</p>
-              <p className="space text-[11px] font-medium uppercase tracking-[0.15em] text-black/30" dir="ltr">WHAT&apos;S INSIDE</p>
+              <p className="space text-xs font-medium text-black/30" dir="ltr">What&apos;s inside</p>
             </div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:gap-4">
               {p.ingredients.map((ing) => (
@@ -341,7 +341,7 @@ export default function ProductDetail({
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <p className="readex text-sm font-semibold text-black/80">{ing.ar}</p>
-                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-black/40">{ing.en}</p>
+                      <p className="mt-0.5 text-xs text-black/40">{ing.en}</p>
                     </div>
                     {ing.amount !== "—" && ing.amount !== "0" && (
                       <span className="space shrink-0 text-sm font-bold" style={{ color: p.accent }}>{ing.amount}</span>
@@ -369,14 +369,14 @@ export default function ProductDetail({
         <div className="mx-auto max-w-[1300px] px-6 py-12 md:px-12 md:py-16">
           <div className="mb-6 flex items-center justify-between">
             <p
-              className="space text-[13px] font-medium uppercase tracking-[0.15em] text-black/40"
+              className="space text-[13px] font-medium text-black/40"
               dir="ltr"
             >
-              YOU MIGHT ALSO LIKE
+              You might also like
             </p>
             <a
               href="/products"
-              className="space text-[11px] font-medium uppercase tracking-[0.1em] text-black/25 transition-colors hover:text-black/50"
+              className="space text-xs font-medium text-black/25 transition-colors hover:text-black/50"
               dir="ltr"
             >
               View all →

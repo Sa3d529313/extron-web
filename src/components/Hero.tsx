@@ -3,15 +3,17 @@
 import Image from "@/components/Img";
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const mobileSlides = [
-  "/brand/12345.jpeg",
-  "/brand/1234.jpeg",
-  "/brand/hero-slide-1.png",
-  "/brand/hero-slide-2.png",
-  "/brand/hero-slide-3.png",
-  "/brand/hero-slide-4.jpg",
-  "/brand/hero-bg-mobile.png",
+// fit: how each slide sits in the 4:5 frame (JPG copies of the original PNGs, same framing).
+const mobileSlideList = [
+  { src: "/brand/12345.jpeg", fit: "cover" },
+  { src: "/brand/1234.jpeg", fit: "cover" },
+  { src: "/brand/hero-slide-1.jpg", fit: "contain" },
+  { src: "/brand/hero-slide-2.jpg", fit: "contain" },
+  { src: "/brand/hero-slide-3.jpg", fit: "contain" },
+  { src: "/brand/hero-slide-4.jpg", fit: "cover" },
+  { src: "/brand/hero-bg-mobile.jpg", fit: "cover" },
 ];
+const mobileSlides = mobileSlideList.map((s) => s.src);
 
 const SLIDE_DURATION = 4500;
 
@@ -101,13 +103,13 @@ function MobileHero() {
                 fill
                 priority
                 sizes="100vw"
-                className={src.endsWith(".jpeg") || src.endsWith(".jpg") || i === mobileSlides.length - 1 ? "object-cover object-center" : "object-contain object-center"}
+                className={mobileSlideList[i].fit === "cover" ? "object-cover object-center" : "object-contain object-center"}
               />
             </div>
           );
         })}
 
-        <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
+        <div className="hero-rise absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
           <a
             href="/about"
             dir="rtl"
@@ -219,6 +221,7 @@ function DesktopHero() {
     >
       {/* Banner — full screen width, whole picture */}
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: String(BANNER_RATIO) }}>
+        <div className="hero-zoom absolute inset-0">
         {prevIndex !== null && (
           <div
             key={`out-${prevIndex}`}
@@ -235,10 +238,11 @@ function DesktopHero() {
         >
           {renderBanner(bgIndex)}
         </div>
+        </div>
       </div>
 
       {/* Buttons — on the picture itself, clear of the straps that cross its bottom edge */}
-      <div className="absolute inset-x-0 bottom-[96px] z-10 flex flex-col items-center gap-4">
+      <div className="hero-rise absolute inset-x-0 bottom-[96px] z-10 flex flex-col items-center gap-4">
         <div className="flex flex-row-reverse items-center gap-3" dir="ltr">
           <a
             href="/products"

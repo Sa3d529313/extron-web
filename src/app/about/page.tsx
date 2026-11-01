@@ -45,7 +45,7 @@ export default function AboutPage() {
 
             <div className="grid items-end gap-10 md:grid-cols-[1.3fr_1fr] md:gap-16">
               <div>
-                <p className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--lime)]">
+                <p className="mb-5 flex items-center gap-3 text-sm text-[var(--lime)]">
                   <span className="h-px w-8 bg-[var(--lime)]" />
                   عن الشركة · About
                 </p>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             <div className="mt-16 grid items-center gap-6 border-t border-white/10 pt-10 md:grid-cols-[auto_1fr] md:gap-12">
               <div className="flex items-center gap-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-[var(--lime)]" />
-                <p className="text-xs uppercase tracking-[0.25em] text-[var(--lime)]">Exclusive Agency</p>
+                <p className="text-sm text-[var(--lime)]">Exclusive Agency</p>
               </div>
               <div dir="rtl" className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                 <h2 className="readex text-xl text-white md:text-2xl">
@@ -103,13 +103,13 @@ export default function AboutPage() {
           <div className="mx-auto max-w-[1400px] px-6 md:px-10">
             <div className="mb-10 flex items-end justify-between">
               <h2 className="readex text-3xl text-white md:text-4xl">شو بيميّزنا</h2>
-              <p className="hidden text-xs uppercase tracking-[0.2em] text-white/20 md:block">What Sets Us Apart</p>
+              <p className="hidden text-sm text-white/20 md:block">What Sets Us Apart</p>
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               {values.map((t) => (
                 <div key={t.en} className="group border border-white/10 bg-white/[0.02] p-8 transition-colors duration-300 hover:border-[var(--lime)]/25">
                   <p className="readex text-2xl text-[var(--lime)]">{t.ar}</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.25em] text-white/30">{t.en}</p>
+                  <p className="mt-1 text-xs text-white/30">{t.en}</p>
                   <p className="ar mt-5 text-sm leading-relaxed text-white/60" dir="rtl">{t.desc}</p>
                 </div>
               ))}

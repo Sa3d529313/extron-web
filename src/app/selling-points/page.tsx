@@ -19,7 +19,7 @@ export default function SellingPointsPage() {
             <span dir="ltr">→</span>
             <span>العودة للرئيسية</span>
           </Link>
-          <p className="mb-3 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[var(--lime)]" dir="rtl">
+          <p className="mb-3 flex items-center gap-3 text-sm text-[var(--lime)]" dir="rtl">
             <span className="h-px w-8 bg-[var(--lime)]" />
             نقاط البيع · Where to Buy
           </p>
