@@ -137,6 +137,8 @@ function MobileHero() {
 const DESKTOP_SLIDE_DURATION = 9000;
 
 const desktopSlides = [
+  // 1679×937 — a little taller than the 2:1 frame, so it fills it (trims a sliver of wall and floor).
+  { banner: "/brand/banners/hero-type-2.jpg", alt: "EXTRON — Clean Energy Drink", cover: true },
   { banner: "/brand/banners/energy-duo.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" },
   { banner: "/brand/banners/soda-trio.jpg", alt: "المشروبات الغازية — انتعاش لكل الأذواق" },
 ];
@@ -206,7 +208,7 @@ function DesktopHero() {
       fill
       priority={idx === 0}
       sizes="100vw"
-      className="object-contain object-center"
+      className={`${"cover" in desktopSlides[idx] ? "object-cover" : "object-contain"} object-center`}
     />
   );
 
