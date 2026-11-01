@@ -447,6 +447,21 @@ details[open] .faq-chevron { transform: rotate(45deg); }
 }
 .detail-back { animation: back-drop-in 0.5s ease both; }
 
+/* Intro loader */
+.intro-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #05060a;
+  display: grid;
+  place-items: center;
+  animation: intro-force-dismiss 4s ease-in forwards;
+}
+@keyframes intro-force-dismiss {
+  0%, 75% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #05060a; }
@@ -598,60 +613,15 @@ html { scrollbar-gutter: stable; }
 .is-in .fade-up.d2 { transition-delay: 0.24s; }
 .is-in .fade-up.d3 { transition-delay: 0.36s; }
 
-/* ---------- Intro → header hand-off (Intro.tsx) ---------- */
-.intro-root { display: none; }
-html[data-intro="play"] .intro-root { display: block; }
-.intro-curtain {
-  position: fixed;
-  inset-inline: 0;
-  top: 0;
-  z-index: 100;
-  /* 180px taller than the screen, its bottom feathered, so the lift has a soft edge */
-  height: calc(100vh + 180px);
-  background: linear-gradient(to bottom, #05060a calc(100% - 180px), rgba(5, 6, 10, 0));
-  will-change: transform;
-  animation: intro-fallback 0.6s 7s forwards;
-}
-.intro-count {
-  position: absolute;
-  bottom: calc(180px + 28px);
-  left: 32px;
-  direction: ltr;
-  font-family: var(--font-readex), system-ui, sans-serif;
-  font-weight: 200;
-  font-size: clamp(44px, 7vw, 104px);
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.85);
-  font-variant-numeric: tabular-nums;
-}
-.intro-mark {
-  position: fixed;
-  z-index: 101;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  display: flex;
-  direction: ltr;
-  height: 64px;
-  will-change: transform;
-  animation: intro-fallback 0.6s 7s forwards;
-}
-@media (min-width: 768px) { .intro-mark { height: 96px; } }
-.intro-mark img { display: block; height: 100%; width: auto; }
-.intro-piece { opacity: 0; transform: translateY(30%) scale(0.7); }
-@keyframes intro-fallback { to { opacity: 0; visibility: hidden; } }
-html[data-intro="play"]:not(.intro-done) #nav-logo { opacity: 0; }
 
-/* Hero entrance — starts while the curtain is still lifting */
-.hero-rise { animation: hero-rise 1.4s var(--ease) 0.25s both; }
-.hero-rise-2 { animation-delay: 0.4s; }
-html[data-intro="play"] .hero-rise { animation-delay: 2.75s; }
-html[data-intro="play"] .hero-rise-2 { animation-delay: 2.9s; }
+
+/* Hero entrance — starts as the loading screen fades (Intro.tsx leaves at 2.6s) */
+.hero-rise { animation: hero-rise 1.4s var(--ease) 2.75s both; }
+.hero-rise-2 { animation-delay: 2.9s; }
 @keyframes hero-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 /* every inner page's main title arrives the same way */
 main h1 { animation: hero-rise 1.4s var(--ease) 0.1s both; }
-.hero-zoom { animation: hero-zoom 2.6s var(--ease) 0.05s both; }
-html[data-intro="play"] .hero-zoom { animation-delay: 2.4s; }
+.hero-zoom { animation: hero-zoom 2.6s var(--ease) 2.5s both; }
 @keyframes hero-zoom { from { transform: scale(1.07); } to { transform: none; } }
 
 /* ---------- Liquid-glass header ---------- */
@@ -833,4 +803,34 @@ html.cursor-link .cursor-dot > span { transform: scale(0.35); }
 @media (prefers-reduced-motion: reduce) {
   .hero-rise, .hero-zoom, main h1 { animation: none; }
   .line-mask > span, .fade-up { transform: none; opacity: 1; transition: none; }
+}
+
+
+/* Slow breathing glow: animate opacity instead of recalculating blur every frame. */
+.intro-mask { opacity: 1; transition: opacity 1100ms cubic-bezier(.4,0,.2,1); }
+.intro-mask[data-leaving="true"] { opacity: 0; pointer-events: none; }
+.intro-logo {
+  position: relative;
+  transition: opacity 900ms ease, transform 900ms cubic-bezier(.4,0,.2,1);
+}
+.intro-mask[data-leaving="true"] .intro-logo {
+  opacity: 0;
+  transform: scale(0.92);
+}
+.intro-logo-base { display: block; opacity: .3; }
+.intro-logo-glow {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 0 16px rgba(166,236,47,.85)) drop-shadow(0 0 38px rgba(166,236,47,.55));
+  animation: intro-breathe 2.4s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes intro-breathe {
+  0%, 100% { opacity: .04; }
+  50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Brightness-only breathing remains visible without spatial motion. */
+  .intro-logo-glow { animation: intro-breathe 2.4s ease-in-out infinite; }
+  .intro-mask { transition-duration: 200ms; }
 }

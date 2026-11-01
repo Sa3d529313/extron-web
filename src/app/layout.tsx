@@ -43,9 +43,8 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
-// Runs before the page paints: decides whether the home intro plays (once per
-// session, never with reduced motion) and keeps every page opening at the top.
-const bootScript = `(function(){var d=document.documentElement;try{if("scrollRestoration" in history)history.scrollRestoration="manual";var play=location.pathname==="/"&&!sessionStorage.getItem("extron-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches;d.setAttribute("data-intro",play?"play":"skip")}catch(e){d.setAttribute("data-intro","skip")}})();`;
+// Runs before the page paints: keeps every page opening at the top.
+const bootScript = `try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}`;
 
 const siteDescription =
   "EXTRON — إكسترون فلسطين، علامة مشروبات الطاقة النظيفة. Extron Palestine energy drinks and premium beverages — for distributors, supermarkets, cafés, and restaurants across Palestine.";
