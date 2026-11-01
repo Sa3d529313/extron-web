@@ -146,8 +146,6 @@ const desktopSlides = [
 // Banner artwork is 1774×887 (2:1). It runs edge to edge across the screen
 // and is shown whole — never cropped.
 const BANNER_RATIO = 1774 / 887;
-// Room for the floating nav above the banner, so the nav never covers its headline.
-const NAV_SPACE = 96;
 
 function DesktopHero() {
   const [bgIndex, setBgIndex] = useState(0);
@@ -215,7 +213,7 @@ function DesktopHero() {
   return (
     <section
       className="relative isolate hidden flex-col bg-[#05060a] md:flex"
-      style={{ cursor: "grab", touchAction: "pan-y pinch-zoom", paddingTop: NAV_SPACE }}
+      style={{ cursor: "grab", touchAction: "pan-y pinch-zoom" }}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
     >
@@ -239,8 +237,8 @@ function DesktopHero() {
         </div>
       </div>
 
-      {/* Buttons — same colours on every slide; room below for the straps that cross the seam */}
-      <div className="flex flex-col items-center gap-4 pt-7 pb-[92px]">
+      {/* Buttons — on the picture itself, clear of the straps that cross its bottom edge */}
+      <div className="absolute inset-x-0 bottom-[96px] z-10 flex flex-col items-center gap-4">
         <div className="flex flex-row-reverse items-center gap-3" dir="ltr">
           <a
             href="/products"
@@ -274,7 +272,7 @@ function DesktopHero() {
               onClick={() => { goTo(i); resetTimer(); }}
               className="group/dot flex h-6 items-center"
             >
-              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-white/20 transition-colors group-hover/dot:bg-white/35">
+              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-black/40 shadow-[0_0_0_1px_rgba(255,255,255,0.15)] transition-colors group-hover/dot:bg-black/55">
                 {i === bgIndex && (
                   <span
                     key={progressKey}
