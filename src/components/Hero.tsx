@@ -139,10 +139,9 @@ function MobileHero() {
 const DESKTOP_SLIDE_DURATION = 9000;
 
 const desktopSlides = [
+  { banner: "/brand/banners/energy-nature.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" },
   // 1679×937 — a little taller than the 2:1 frame, so it fills it (trims a sliver of wall and floor).
   { banner: "/brand/banners/hero-type-2.jpg", alt: "EXTRON — Clean Energy Drink", cover: true },
-  { banner: "/brand/banners/energy-duo.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" },
-  { banner: "/brand/banners/soda-trio.jpg", alt: "المشروبات الغازية — انتعاش لكل الأذواق" },
 ];
 
 // Banner artwork is 1774×887 (2:1). It runs edge to edge across the screen
