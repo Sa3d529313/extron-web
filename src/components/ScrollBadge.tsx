@@ -31,7 +31,8 @@ export default function ScrollBadge() {
       ring.style.transform = `rotate(${-angle * 0.6}deg)`;
     };
     const onScroll = () => {
-      badge.classList.toggle("is-shown", lenis.scroll > 380);
+      // hides again at the very bottom, so it never covers the footer's last line
+      badge.classList.toggle("is-shown", lenis.scroll > 380 && lenis.limit - lenis.scroll > 120);
       const r = badge.getBoundingClientRect();
       const under = document
         .elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)

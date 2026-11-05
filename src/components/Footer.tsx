@@ -179,7 +179,26 @@ export default function Footer() {
             © {new Date().getFullYear()} EXTRON · Palestine · All rights
             reserved.
           </p>
-          <p className="ar">صُنع بشغف — من نابلس إلى العالم.</p>
+          <a
+            href="https://sa3d529313.github.io/obzervo/"
+            target="_blank"
+            rel="noopener"
+            dir="ltr"
+            className="group/obz inline-flex items-center gap-2 text-white/40 transition-colors hover:text-white"
+          >
+            <span>Designed &amp; built by</span>
+            <Image
+              src="/brand/obzervo/obzervo-mark-white.png"
+              alt=""
+              aria-hidden="true"
+              width={160}
+              height={136}
+              className="h-[14px] w-auto opacity-60 transition-[opacity,transform] duration-300 group-hover/obz:rotate-[120deg] group-hover/obz:opacity-100"
+            />
+            <span className="font-bold tracking-wide text-white/70 transition-colors group-hover/obz:text-[var(--lime)]">
+              Obzervo
+            </span>
+          </a>
         </div>
       </div>
     </footer>
