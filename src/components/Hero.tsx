@@ -136,107 +136,18 @@ function MobileHero() {
   );
 }
 
-const DESKTOP_SLIDE_DURATION = 9000;
-
-const desktopSlides = [
-  { banner: "/brand/banners/energy-nature.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" },
-  // 1679×937 — a little taller than the 2:1 frame, so it fills it (trims a sliver of wall and floor).
-  { banner: "/brand/banners/hero-type-2.jpg", alt: "EXTRON — Clean Energy Drink", cover: true },
-];
-
 // Banner artwork is 1774×887 (2:1). It runs edge to edge across the screen
 // and is shown whole — never cropped.
+const BANNER = { src: "/brand/banners/energy-nature.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة" };
 const BANNER_RATIO = 1774 / 887;
 
 function DesktopHero() {
-  const [bgIndex, setBgIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState<number | null>(null);
-  const [animating, setAnimating] = useState(false);
-  const [progressKey, setProgressKey] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const goTo = useCallback((target: number) => {
-    if (animating) return;
-    setBgIndex(prev => {
-      const next = ((target % desktopSlides.length) + desktopSlides.length) % desktopSlides.length;
-      if (next === prev) return prev;
-      setPrevIndex(prev);
-      setAnimating(true);
-      setProgressKey(k => k + 1);
-      return next;
-    });
-    setTimeout(() => { setAnimating(false); setPrevIndex(null); }, 1500);
-  }, [animating]);
-
-  const advanceSlide = useCallback((direction: number = 1) => {
-    goTo(bgIndex + direction);
-  }, [goTo, bgIndex]);
-
-  const resetTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => advanceSlide(1), DESKTOP_SLIDE_DURATION);
-  }, [advanceSlide]);
-
-  useEffect(() => {
-    resetTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [resetTimer]);
-
-  const dragRef = useRef<{ x: number; t: number } | null>(null);
-
-  const onPointerDown = useCallback((e: React.PointerEvent) => {
-    dragRef.current = { x: e.clientX, t: Date.now() };
-  }, []);
-
-  const onPointerUp = useCallback((e: React.PointerEvent) => {
-    if (!dragRef.current) return;
-    const dx = e.clientX - dragRef.current.x;
-    const dt = Date.now() - dragRef.current.t;
-    const velocity = Math.abs(dx) / dt;
-    if (Math.abs(dx) > 50 || velocity > 0.3) {
-      advanceSlide(dx < 0 ? 1 : -1);
-      resetTimer();
-    }
-    dragRef.current = null;
-  }, [advanceSlide, resetTimer]);
-
-  const renderBanner = (idx: number) => (
-    <Image
-      src={desktopSlides[idx].banner}
-      alt={desktopSlides[idx].alt}
-      fill
-      priority={idx === 0}
-      sizes="100vw"
-      className={`${"cover" in desktopSlides[idx] ? "object-cover" : "object-contain"} object-center`}
-    />
-  );
-
   return (
-    <section
-      className="relative isolate hidden flex-col bg-[#05060a] md:flex"
-      style={{ cursor: "grab", touchAction: "pan-y pinch-zoom" }}
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-    >
+    <section className="relative isolate hidden flex-col bg-[#05060a] md:flex">
       {/* Banner — full screen width, whole picture */}
       <div className="relative w-full overflow-hidden" style={{ aspectRatio: String(BANNER_RATIO) }}>
         <div className="hero-zoom absolute inset-0">
-        {prevIndex !== null && (
-          <div
-            key={`out-${prevIndex}`}
-            className="absolute inset-0"
-            style={{ animation: "heroSlideOut 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" }}
-          >
-            {renderBanner(prevIndex)}
-          </div>
-        )}
-        <div
-          key={`in-${bgIndex}`}
-          className="absolute inset-0"
-          style={{ animation: animating ? "heroSlideIn 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards" : "none" }}
-        >
-          {renderBanner(bgIndex)}
-        </div>
+          <Image src={BANNER.src} alt={BANNER.alt} fill priority sizes="100vw" className="object-contain object-center" />
         </div>
       </div>
 
@@ -261,31 +172,6 @@ function DesktopHero() {
             <span>اعرف أكثر عن إكسترون</span>
             <span dir="ltr" className="transition-transform duration-300 group-hover/sec:translate-x-1">→</span>
           </a>
-        </div>
-
-        {/* Slide indicators — click to switch; the active one fills as the slide plays */}
-        <div className="flex items-center gap-2" dir="ltr">
-          {desktopSlides.map((s, i) => (
-            <button
-              key={s.banner}
-              type="button"
-              aria-label={`الشريحة ${i + 1}`}
-              aria-current={i === bgIndex}
-              onPointerDown={(e) => e.stopPropagation()}
-              onClick={() => { goTo(i); resetTimer(); }}
-              className="group/dot flex h-6 items-center"
-            >
-              <span className="relative block h-[4px] w-12 overflow-hidden rounded-full bg-black/40 shadow-[0_0_0_1px_rgba(255,255,255,0.15)] transition-colors group-hover/dot:bg-black/55">
-                {i === bgIndex && (
-                  <span
-                    key={progressKey}
-                    className="absolute inset-y-0 left-0 rounded-full bg-white"
-                    style={{ animation: `heroProgress ${DESKTOP_SLIDE_DURATION}ms linear forwards` }}
-                  />
-                )}
-              </span>
-            </button>
-          ))}
         </div>
       </div>
     </section>
