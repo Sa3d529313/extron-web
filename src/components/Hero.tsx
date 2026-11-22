@@ -1,115 +1,15 @@
-"use client";
-
 import Image from "@/components/Img";
-import { useEffect, useRef, useState, useCallback } from "react";
 
-// fit: how each slide sits in the 4:5 frame (JPG copies of the original PNGs, same framing).
-const mobileSlideList = [
-  { src: "/brand/12345.jpeg", fit: "cover" },
-  { src: "/brand/1234.jpeg", fit: "cover" },
-  { src: "/brand/hero-slide-1.jpg", fit: "contain" },
-  { src: "/brand/hero-slide-2.jpg", fit: "contain" },
-  { src: "/brand/hero-slide-3.jpg", fit: "contain" },
-  { src: "/brand/hero-slide-4.jpg", fit: "cover" },
-  { src: "/brand/hero-bg-mobile.jpg", fit: "cover" },
-];
-const mobileSlides = mobileSlideList.map((s) => s.src);
-
-const SLIDE_DURATION = 4500;
+// Phone hero: one picture, shown whole at its own size ratio (941×1672) — never cropped.
+const MOBILE_BANNER = { src: "/brand/hero-mobile-nature.jpg", alt: "مشروبات الطاقة — طاقة من الطبيعة", w: 941, h: 1672 };
 
 function MobileHero() {
-  const [current, setCurrent] = useState(0);
-  const [dragX, setDragX] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const touchRef = useRef<{ x: number; t: number } | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const goTo = useCallback((idx: number) => {
-    const next = ((idx % mobileSlides.length) + mobileSlides.length) % mobileSlides.length;
-    setCurrent(next);
-    setDragX(0);
-    setDragging(false);
-  }, []);
-
-  const resetTimer = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => {
-      setCurrent(prev => (prev + 1) % mobileSlides.length);
-    }, SLIDE_DURATION);
-  }, []);
-
-  useEffect(() => {
-    resetTimer();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [current, resetTimer]);
-
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    touchRef.current = { x: e.touches[0].clientX, t: Date.now() };
-    setDragging(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-  }, []);
-
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!touchRef.current) return;
-    const dx = e.touches[0].clientX - touchRef.current.x;
-    setDragX(dx);
-  }, []);
-
-  const onTouchEnd = useCallback((e: React.TouchEvent) => {
-    if (!touchRef.current) return;
-    const dx = e.changedTouches[0].clientX - touchRef.current.x;
-    const dt = Date.now() - touchRef.current.t;
-    const velocity = Math.abs(dx) / dt;
-    if (Math.abs(dx) > 60 || velocity > 0.3) {
-      goTo(current + (dx < 0 ? 1 : -1));
-    } else {
-      setDragX(0);
-      setDragging(false);
-    }
-    touchRef.current = null;
-    resetTimer();
-  }, [current, goTo, resetTimer]);
-
   return (
     <section className="hero-mobile overflow-hidden bg-[#05060a] md:hidden">
-      <div
-        dir="ltr"
-        className="relative w-full overflow-hidden"
-        style={{ aspectRatio: "4 / 5", marginTop: "80px", touchAction: "pan-y pinch-zoom" }}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        {mobileSlides.map((src, i) => {
-          let diff = i - current;
-          const n = mobileSlides.length;
-          if (diff > n / 2) diff -= n;
-          if (diff < -n / 2) diff += n;
-          const offset = diff * 100;
-          const isVisible = Math.abs(diff) <= 1;
-          return (
-            <div
-              key={src}
-              className="absolute inset-0"
-              style={{
-                transform: `translateX(calc(${offset}% + ${isVisible ? dragX : 0}px))`,
-                transition: dragging || !isVisible ? "none" : "transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)",
-                visibility: Math.abs(diff) > 1 ? "hidden" : "visible",
-              }}
-            >
-              <Image
-                src={src}
-                alt={`EXTRON slide ${i + 1}`}
-                fill
-                priority
-                sizes="100vw"
-                className={mobileSlideList[i].fit === "cover" ? "object-cover object-center" : "object-contain object-center"}
-              />
-            </div>
-          );
-        })}
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: `${MOBILE_BANNER.w} / ${MOBILE_BANNER.h}` }}>
+        <Image src={MOBILE_BANNER.src} alt={MOBILE_BANNER.alt} fill priority sizes="100vw" className="object-contain object-center" />
 
-        <div className="hero-rise absolute inset-x-0 bottom-6 z-10 flex justify-center px-6">
+        <div className="hero-rise absolute inset-x-0 bottom-[104px] z-10 flex justify-center px-6">
           <a
             href="/about"
             dir="rtl"
@@ -119,18 +19,6 @@ function MobileHero() {
             <span dir="ltr">→</span>
           </a>
         </div>
-      </div>
-
-      <div dir="ltr" className="flex justify-center gap-2 bg-[#eae7e1] pt-4 pb-[72px] md:pb-4">
-        {mobileSlides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`Slide ${i + 1}`}
-            className="h-[7px] w-[7px] rounded-full transition-colors duration-300"
-            style={{ backgroundColor: i === current ? "#05060a" : "rgba(5,6,10,0.2)" }}
-          />
-        ))}
       </div>
     </section>
   );
